@@ -7,8 +7,8 @@
   <style>
     :root {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: #111827;
-      background: #f3f4f6;
+      color: #0f172a; /* navy text */
+      background: #e5f3f5;
     }
 
     body {
@@ -18,12 +18,12 @@
       justify-content: center;
       align-items: flex-start;
       padding: 2rem 1rem;
-      background: radial-gradient(circle at top, #e0f2fe, #f3f4f6);
+      background: radial-gradient(circle at top, #ccfbf1, #e5f3f5);
     }
 
     .app {
       width: 100%;
-      max-width: 960px;
+      max-width: 980px;
       background: #ffffff;
       border-radius: 1.25rem;
       box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
@@ -33,13 +33,14 @@
 
     h1 {
       margin: 0 0 0.5rem;
-      font-size: 1.75rem;
+      font-size: 1.8rem;
       letter-spacing: -0.03em;
+      color: #0f172a;
     }
 
     .subtitle {
       margin: 0 0 1.5rem;
-      color: #6b7280;
+      color: #64748b;
       font-size: 0.95rem;
     }
 
@@ -53,19 +54,20 @@
     .badge {
       padding: 0.2rem 0.7rem;
       border-radius: 999px;
-      background: #eff6ff;
-      color: #1d4ed8;
+      background: #e0f2fe;
+      color: #0f172a;
+      border: 1px solid #bae6fd;
       font-size: 0.8rem;
     }
 
     .grid {
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 3fr);
       gap: 1.5rem;
       margin-top: 1rem;
     }
 
-    @media (max-width: 800px) {
+    @media (max-width: 880px) {
       .grid {
         grid-template-columns: 1fr;
       }
@@ -83,6 +85,7 @@
       margin-top: 0;
       margin-bottom: 0.75rem;
       font-size: 1.1rem;
+      color: #020617;
     }
 
     .section-label {
@@ -90,7 +93,7 @@
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #9ca3af;
+      color: #94a3b8;
       margin-bottom: 0.4rem;
     }
 
@@ -106,11 +109,12 @@
       gap: 0.4rem;
       padding: 0.35rem 0.7rem;
       border-radius: 999px;
-      background: #e5e7eb;
+      background: #e2e8f0;
       cursor: pointer;
       font-size: 0.85rem;
       border: 1px solid transparent;
       user-select: none;
+      color: #0f172a;
     }
 
     .chip input {
@@ -118,13 +122,13 @@
     }
 
     .chip.selected {
-      background: #1d4ed8;
-      color: #eff6ff;
-      border-color: #1d4ed8;
+      background: #0f172a;
+      color: #e0f2fe;
+      border-color: #0f172a;
     }
 
     .chip.selected input {
-      accent-color: #eff6ff;
+      accent-color: #e0f2fe;
     }
 
     .control-group {
@@ -143,6 +147,7 @@
       border: 1px solid #d1d5db;
       background: #ffffff;
       box-sizing: border-box;
+      color: #0f172a;
     }
 
     .difficulty-row {
@@ -162,23 +167,24 @@
       text-align: center;
       cursor: pointer;
       transition: transform 0.05s ease, box-shadow 0.05s ease, background 0.1s ease;
+      color: #0f172a;
     }
 
     .difficulty-btn.active {
-      background: #111827;
-      color: #f9fafb;
-      border-color: #111827;
+      background: #0f172a;
+      color: #e0f2fe;
+      border-color: #0f172a;
       box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
     }
 
     .difficulty-btn span {
       display: block;
       font-size: 0.75rem;
-      color: #6b7280;
+      color: #64748b;
     }
 
     .difficulty-btn.active span {
-      color: #e5e7eb;
+      color: #e2e8f0;
     }
 
     .players-row {
@@ -200,11 +206,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      color: #0f172a;
     }
 
     #playerCountLabel {
       font-size: 0.9rem;
-      color: #374151;
+      color: #475569;
     }
 
     .players-list {
@@ -229,6 +236,7 @@
       border: 1px solid #d1d5db;
       font-size: 0.85rem;
       background: #ffffff;
+      color: #0f172a;
     }
 
     .hint-toggle {
@@ -245,7 +253,7 @@
       padding: 0.65rem 0.75rem;
       border-radius: 0.75rem;
       border: none;
-      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      background: linear-gradient(135deg, #0f766e, #0f172a); /* teal → navy */
       color: white;
       font-weight: 600;
       cursor: pointer;
@@ -254,12 +262,12 @@
       align-items: center;
       justify-content: center;
       gap: 0.4rem;
-      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.35);
     }
 
     .generate-btn:active {
       transform: translateY(1px);
-      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
+      box-shadow: 0 4px 10px rgba(15, 23, 42, 0.35);
     }
 
     .error {
@@ -287,28 +295,31 @@
       font-size: 0.75rem;
       padding: 0.25rem 0.55rem;
       border-radius: 999px;
-      background: #eff6ff;
-      color: #1d4ed8;
+      background: #e0f2fe;
+      color: #0f172a;
+      border: 1px solid #bae6fd;
     }
 
     .difficulty-pill {
-      background: #fef3c7;
-      color: #92400e;
+      background: #ecfeff;
+      color: #0f766e;
+      border-color: #a5f3fc;
     }
 
     .hint-box {
       padding: 0.7rem 0.8rem;
       background: #ecfeff;
       border-radius: 0.75rem;
-      border: 1px dashed #06b6d4;
+      border: 1px dashed #0f766e;
       font-size: 0.9rem;
       margin-bottom: 0.75rem;
+      color: #0f172a;
     }
 
     .secret-box {
       padding: 0.9rem 0.95rem;
       border-radius: 0.85rem;
-      border: 1px solid #e5e7eb;
+      border: 1px solid #e2e8f0;
       background: #ffffff;
       display: flex;
       justify-content: space-between;
@@ -321,50 +332,42 @@
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #9ca3af;
+      color: #94a3b8;
       margin-bottom: 0.15rem;
     }
 
     .secret-word {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 600;
       letter-spacing: 0.04em;
+      color: #020617;
+      white-space: pre-wrap;
     }
 
- .secret-word.hidden {
-  visibility: hidden;  /* text is fully hidden but space stays */
-  user-select: none;
-
+    .secret-word.hidden {
+      visibility: hidden; /* fully hidden, no blur */
+      user-select: none;
     }
 
     .reveal-btn {
       padding: 0.4rem 0.75rem;
       border-radius: 999px;
       border: none;
-      background: #111827;
-      color: #f9fafb;
+      background: #0f172a;
+      color: #e0f2fe;
       font-size: 0.85rem;
       cursor: pointer;
       white-space: nowrap;
     }
 
-    .tips {
-      font-size: 0.8rem;
-      color: #6b7280;
-      line-height: 1.4;
+    .reveal-btn:active {
+      transform: translateY(1px);
     }
 
-    .start-round-btn {
-      margin-top: 0.5rem;
-      width: 100%;
-      padding: 0.55rem 0.7rem;
-      border-radius: 0.75rem;
-      border: 1px solid #e5e7eb;
-      background: #22c55e;
-      color: #052e16;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 600;
+    .tips {
+      font-size: 0.8rem;
+      color: #64748b;
+      line-height: 1.4;
     }
 
     .player-reveal-card {
@@ -376,6 +379,7 @@
     .player-name-line {
       font-size: 0.9rem;
       margin-bottom: 0.5rem;
+      color: #0f172a;
     }
 
     .next-player-btn {
@@ -384,8 +388,8 @@
       padding: 0.5rem 0.75rem;
       border-radius: 0.75rem;
       border: none;
-      background: #111827;
-      color: #f9fafb;
+      background: #0f172a;
+      color: #e0f2fe;
       font-size: 0.85rem;
       cursor: pointer;
     }
@@ -394,6 +398,17 @@
       opacity: 0.5;
       cursor: default;
     }
+
+    .start-round-btn {
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      border: none;
+      background: #0f766e;
+      color: #ecfeff;
+      font-size: 0.9rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -401,13 +416,13 @@
     <h1>Imposter EDU – QCAA</h1>
     <p class="subtitle">
       Select subject(s), IA and difficulty to generate a curriculum-aligned secret word
-      for your Imposter game.
+      for your Imposter game. One random player is the Imposter.
     </p>
 
     <div class="badge-row">
-      <span class="badge">AU • QCAA-aligned</span>
-      <span class="badge">Offline classroom friendly</span>
-      <span class="badge">Free to use</span>
+      <span class="badge">QCAA-aligned (Year 12 style)</span>
+      <span class="badge">Subjects + IA + difficulty</span>
+      <span class="badge">Pass &amp; play on one device</span>
     </div>
 
     <div class="grid">
@@ -417,17 +432,16 @@
 
         <div class="control-group">
           <div class="section-label">Subjects (choose one or more)</div>
-          <div class="subject-list" id="subjectList">
-            <!-- Chips created by JS -->
-          </div>
+          <div class="subject-list" id="subjectList"></div>
         </div>
 
         <div class="control-group">
-          <div class="section-label">Internal Assessment (IA)</div>
+          <div class="section-label">IA (content unit)</div>
           <select id="iaSelect">
             <option value="IA1">IA1</option>
             <option value="IA2">IA2</option>
             <option value="IA3">IA3</option>
+            <option value="IA4">IA4</option>
           </select>
         </div>
 
@@ -436,15 +450,15 @@
           <div class="difficulty-row">
             <button class="difficulty-btn active" data-difficulty="easy">
               Easy
-              <span>Core terms</span>
+              <span>Fundamentals</span>
             </button>
             <button class="difficulty-btn" data-difficulty="medium">
               Medium
-              <span>Process / analytic</span>
+              <span>Typical IA content</span>
             </button>
             <button class="difficulty-btn" data-difficulty="hard">
               Hard
-              <span>Exam-level</span>
+              <span>Exam-level terms</span>
             </button>
           </div>
         </div>
@@ -463,27 +477,27 @@
           <div class="section-label">Hint mode</div>
           <label class="hint-toggle">
             <input type="checkbox" id="hintToggle" />
-            Give the imposter a subject hint
+            Give the Imposter a hint: <strong>subject only</strong> (e.g. “General Mathematics”)
           </label>
         </div>
 
         <button class="generate-btn" id="generateBtn">
-          🎲 Generate Word & Start Round
+          🎲 Generate Word &amp; Start Round
         </button>
         <div class="error" id="errorArea"></div>
       </section>
 
       <!-- RIGHT: RESULT -->
       <section class="card">
-        <h2>2. Pass & Play</h2>
+        <h2>2. Pass &amp; Play</h2>
         <div id="resultArea">
           <p class="tips">
-            1) Choose subjects, IA, difficulty and players.<br/>
-            2) Click <strong>Generate Word & Start Round</strong>.<br/>
-            3) A secret word is chosen and one random player is the imposter.<br/>
-            4) Pass the device. Each player taps to see their role:<br/>
-            – Most players see the <strong>word</strong>.<br/>
-            – One player sees <strong>IMPOSTER</strong> (with an optional subject hint). 
+            1) Choose subjects, IA, difficulty and player names.<br/>
+            2) Click <strong>Generate Word &amp; Start Round</strong>.<br/>
+            3) A secret word is chosen; one random player is the <strong>Imposter</strong>.<br/>
+            4) Pass the device: each player taps to see their card.<br/>
+            – Non-imposters see: <strong>Subject + Word</strong>.<br/>
+            – Imposter sees: <strong>“You are the Imposter”</strong> and, if hints are on, the <strong>subject only</strong>.
           </p>
         </div>
       </section>
@@ -491,151 +505,679 @@
   </main>
 
   <script>
-    // ------- DATA -------
+    // ------- SUBJECTS -------
 
     const SUBJECTS = [
-      "Chemistry",
       "General Mathematics",
+      "Mathematical Methods",
+      "Chemistry",
       "Biology",
-      "Economics",
+      "Physics",
       "English",
-      "Modern History"
+      "Literature",
+      "Economics",
+      "Modern History",
+      "Ancient History"
     ];
 
-    // Each entry: { term, hint, subject, ia, difficulty }
+    // ------- WORD BANK -------
+    // Each entry: { subject, ia, difficulty, term }
+    // IA roughly correlates with units of content; 10-ish per difficulty per subject (best-effort).
+
     const WORD_BANK = [
-      // CHEMISTRY
-      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Atom", hint: "Basic particle of matter" },
-      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Ion", hint: "Charged particle" },
-      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Covalent bond", hint: "Shared electrons" },
-      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Electronegativity", hint: "Attraction for shared electrons" },
-      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Intermolecular forces", hint: "Forces between molecules" },
-      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Electron configuration", hint: "Arrangement of electrons in shells" },
-      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Hybridisation", hint: "Mixing of atomic orbitals" },
+      // ---------- GENERAL MATHEMATICS ----------
+      // IA1 – Data & arithmetic
+      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Mean" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Median" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Mode" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Range" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Frequency" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Histogram" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Outlier" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Percentage" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Ratio" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Table" },
 
-      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Reaction rate", hint: "Speed of a reaction" },
-      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Catalyst", hint: "Lowers activation energy" },
-      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Activation energy", hint: "Minimum energy to react" },
-      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Collision theory", hint: "Explains reaction rates" },
-      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Equilibrium constant", hint: "Ratio of products to reactants at equilibrium" },
-      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Redox half-equation", hint: "Shows oxidation or reduction separately" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Standard deviation" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Interquartile range" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Boxplot" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Scatterplot" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Bivariate data" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Time series" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Grouped data" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Stem-and-leaf plot" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Relative frequency" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Cumulative frequency" },
 
-      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "Acid", hint: "Proton donor" },
-      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "pH", hint: "Measure of acidity" },
-      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Buffer", hint: "Resists pH change" },
-      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Titration", hint: "Used to find concentration" },
-      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Le Chatelier", hint: "Predicts shifts in equilibrium" },
-      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Conjugate acid-base pair", hint: "Differ by one proton" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Regression line" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Correlation coefficient" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Residual" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Outlier analysis" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Seasonal variation" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Moving average" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Linear model" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Trend line" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Interpolation" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Extrapolation" },
 
-      // GENERAL MATHEMATICS
-      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Mean", hint: "Average of data" },
-      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Mode", hint: "Most frequent value" },
-      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Standard deviation", hint: "Measure of spread" },
-      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Interquartile range", hint: "Spread of middle 50%" },
-      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Regression line", hint: "Line of best fit" },
-      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Correlation coefficient", hint: "Strength of relationship" },
+      // IA2 – Money, finance, algebra
+      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Simple interest" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Compound interest" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Budget" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Loan" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Deposit" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Balance" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "GST" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Discount" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Mark-up" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Profit" },
 
-      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Percentage", hint: "Out of 100" },
-      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Gradient", hint: "Rise over run" },
-      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Compound interest", hint: "Interest on interest" },
-      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Inequality", hint: "Uses <, >, ≤ or ≥" },
-      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Reducing balance loan", hint: "Loan with decreasing principal" },
-      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Annuity", hint: "Regular payments over time" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Reducing balance loan" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Annuity" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Depreciation" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Credit card" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Repayment schedule" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Term deposit" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Superannuation" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Taxable income" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Net pay" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Gross pay" },
 
-      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Area", hint: "Space inside a shape" },
-      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Volume", hint: "Space inside a solid" },
-      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Prism", hint: "Solid with identical ends" },
-      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Network", hint: "Points joined by edges" },
-      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Critical path", hint: "Longest path in a network" },
-      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Euler trail", hint: "Uses each edge once" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Cash flow" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Amortisation" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Comparison rate" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Remaining principal" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Loan refinancing" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Interest-only loan" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Capital gain" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Appreciation" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Real income" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Inflation rate" },
 
-      // BIOLOGY
-      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Mitochondria", hint: "Cellular power house" },
-      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Enzyme", hint: "Biological catalyst" },
-      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Osmosis", hint: "Diffusion of water" },
-      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Mitosis", hint: "Cell division for growth" },
-      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Transcription", hint: "DNA to mRNA" },
-      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Gene expression", hint: "Using information in DNA" },
+      // IA3 – Measurement, shapes, networks
+      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Perimeter" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Area" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Volume" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Surface area" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Rectangle" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Triangle" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Prism" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Cylinder" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Scale factor" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Net (shape)" },
 
-      { subject: "Biology", ia: "IA2", difficulty: "easy", term: "Photosynthesis", hint: "Plants making glucose" },
-      { subject: "Biology", ia: "IA2", difficulty: "easy", term: "Respiration", hint: "Releasing energy from food" },
-      { subject: "Biology", ia: "IA2", difficulty: "medium", term: "Trophic level", hint: "Position in food chain" },
-      { subject: "Biology", ia: "IA2", difficulty: "medium", term: "Carrying capacity", hint: "Maximum population size" },
-      { subject: "Biology", ia: "IA2", difficulty: "hard", term: "Keystone species", hint: "Species with strong ecosystem effect" },
-      { subject: "Biology", ia: "IA2", difficulty: "hard", term: "Limiting factor", hint: "Restricts population growth" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Composite shape" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Capacity" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Similarity" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Conversion factor" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Network" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Vertex" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Edge" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Path" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Cycle" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Degree (vertex)" },
 
-      { subject: "Biology", ia: "IA3", difficulty: "easy", term: "Trait", hint: "Observable characteristic" },
-      { subject: "Biology", ia: "IA3", difficulty: "easy", term: "Mutation", hint: "Change in DNA sequence" },
-      { subject: "Biology", ia: "IA3", difficulty: "medium", term: "Natural selection", hint: "Survival of the fittest" },
-      { subject: "Biology", ia: "IA3", difficulty: "medium", term: "Genetic drift", hint: "Random change in allele frequencies" },
-      { subject: "Biology", ia: "IA3", difficulty: "hard", term: "Bottleneck effect", hint: "Sharp reduction in population" },
-      { subject: "Biology", ia: "IA3", difficulty: "hard", term: "Hardy-Weinberg", hint: "Model for genetic equilibrium" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Euler trail" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Euler circuit" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Hamiltonian path" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Hamiltonian cycle" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Critical path" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Minimum spanning tree" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Weighted graph" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Directed graph" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Flow capacity" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Shortest path" },
 
-      // ECONOMICS
-      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Supply", hint: "Quantity producers are willing to sell" },
-      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Demand", hint: "Quantity consumers are willing to buy" },
-      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Equilibrium", hint: "Where supply equals demand" },
-      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Elasticity", hint: "Responsiveness to price change" },
-      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Market failure", hint: "Inefficient allocation of resources" },
-      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Externality", hint: "Side effect on third parties" },
+      // IA4 – Review / mixed advanced
+      { subject: "General Mathematics", ia: "IA4", difficulty: "easy", term: "Variable" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "easy", term: "Equation" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "easy", term: "Gradient" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "easy", term: "Intercept" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "easy", term: "Linear relation" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "easy", term: "Table of values" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "easy", term: "Cartesian plane" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "easy", term: "Quadrant" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "easy", term: "Inequality" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "easy", term: "Interval" },
 
-      { subject: "Economics", ia: "IA2", difficulty: "easy", term: "GDP", hint: "Total value of goods and services" },
-      { subject: "Economics", ia: "IA2", difficulty: "easy", term: "Inflation", hint: "General rise in prices" },
-      { subject: "Economics", ia: "IA2", difficulty: "medium", term: "Fiscal policy", hint: "Government spending and tax" },
-      { subject: "Economics", ia: "IA2", difficulty: "medium", term: "Monetary policy", hint: "Central bank interest rate decisions" },
-      { subject: "Economics", ia: "IA2", difficulty: "hard", term: "Stagflation", hint: "High inflation and unemployment" },
-      { subject: "Economics", ia: "IA2", difficulty: "hard", term: "Productivity growth", hint: "Output per worker rising" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "medium", term: "Simultaneous equations" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "medium", term: "Quadratic model" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "medium", term: "Piecewise graph" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "medium", term: "Non-linear relation" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "medium", term: "Rate of change" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "medium", term: "Maximum value" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "medium", term: "Minimum value" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "medium", term: "Break-even point" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "medium", term: "Constraint" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "medium", term: "Feasible region" },
 
-      { subject: "Economics", ia: "IA3", difficulty: "easy", term: "Trade", hint: "Exchange of goods and services" },
-      { subject: "Economics", ia: "IA3", difficulty: "easy", term: "Tariff", hint: "Tax on imports" },
-      { subject: "Economics", ia: "IA3", difficulty: "medium", term: "Exchange rate", hint: "Price of one currency in another" },
-      { subject: "Economics", ia: "IA3", difficulty: "medium", term: "Globalisation", hint: "Increasing worldwide interconnectedness" },
-      { subject: "Economics", ia: "IA3", difficulty: "hard", term: "Foreign investment", hint: "Overseas funds into domestic economy" },
-      { subject: "Economics", ia: "IA3", difficulty: "hard", term: "Trade liberalisation", hint: "Reducing barriers to trade" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "hard", term: "Optimisation" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "hard", term: "Quadratic inequality" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "hard", term: "Simultaneous inequality" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "hard", term: "Non-linear optimisation" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "hard", term: "Piecewise modelling" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "hard", term: "Projection" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "hard", term: "Constraint boundary" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "hard", term: "System of inequalities" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "hard", term: "Objective function" },
+      { subject: "General Mathematics", ia: "IA4", difficulty: "hard", term: "Vertex testing" },
 
-      // ENGLISH
-      { subject: "English", ia: "IA1", difficulty: "easy", term: "Theme", hint: "Central idea or message" },
-      { subject: "English", ia: "IA1", difficulty: "easy", term: "Setting", hint: "Time and place of a text" },
-      { subject: "English", ia: "IA1", difficulty: "medium", term: "Symbolism", hint: "Objects representing ideas" },
-      { subject: "English", ia: "IA1", difficulty: "medium", term: "Narrative voice", hint: "Who is telling the story" },
-      { subject: "English", ia: "IA1", difficulty: "hard", term: "Intertextuality", hint: "Connections between different texts" },
-      { subject: "English", ia: "IA1", difficulty: "hard", term: "Reader positioning", hint: "How the audience is influenced" },
+      // ---------- MATHEMATICAL METHODS ----------
+      // IA1 – Functions & graphs
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "easy", term: "Function" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "easy", term: "Domain" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "easy", term: "Range" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "easy", term: "Parabola" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "easy", term: "Linear function" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "easy", term: "Quadratic function" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "easy", term: "Turning point" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "easy", term: "Intercept" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "easy", term: "Graph" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "easy", term: "Asymptote" },
 
-      { subject: "English", ia: "IA2", difficulty: "easy", term: "Audience", hint: "Intended readers or viewers" },
-      { subject: "English", ia: "IA2", difficulty: "easy", term: "Tone", hint: "Author's attitude" },
-      { subject: "English", ia: "IA2", difficulty: "medium", term: "Juxtaposition", hint: "Contrasting ideas side by side" },
-      { subject: "English", ia: "IA2", difficulty: "medium", term: "Allusion", hint: "Indirect reference to another text" },
-      { subject: "English", ia: "IA2", difficulty: "hard", term: "Motif", hint: "Recurring symbol or idea" },
-      { subject: "English", ia: "IA2", difficulty: "hard", term: "Ideology", hint: "System of beliefs and values" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "medium", term: "Composite function" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "medium", term: "Inverse function" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "medium", term: "Rational function" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "medium", term: "Piecewise function" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "medium", term: "Transformation" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "medium", term: "Stretch" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "medium", term: "Translation" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "medium", term: "Reflection" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "medium", term: "Zero of a function" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "medium", term: "Monotonicity" },
 
-      { subject: "English", ia: "IA3", difficulty: "easy", term: "Thesis", hint: "Main argument" },
-      { subject: "English", ia: "IA3", difficulty: "easy", term: "Evidence", hint: "Support for a claim" },
-      { subject: "English", ia: "IA3", difficulty: "medium", term: "Representation", hint: "How people or ideas are portrayed" },
-      { subject: "English", ia: "IA3", difficulty: "medium", term: "Discourse", hint: "Way of talking about a topic" },
-      { subject: "English", ia: "IA3", difficulty: "hard", term: "Metanarrative", hint: "Big overarching story or worldview" },
-      { subject: "English", ia: "IA3", difficulty: "hard", term: "Deconstruction", hint: "Questioning fixed meanings" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "hard", term: "Polynomial function" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "hard", term: "Cubic function" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "hard", term: "Rational root" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "hard", term: "End behaviour" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "hard", term: "Multiplicity" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "hard", term: "Inequality region" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "hard", term: "Functional equation" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "hard", term: "Logarithmic scale" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "hard", term: "Exponential model" },
+      { subject: "Mathematical Methods", ia: "IA1", difficulty: "hard", term: "Inverse function domain" },
 
-      // MODERN HISTORY
-      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Bias", hint: "Preference that affects judgement" },
-      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Perspective", hint: "Point of view" },
-      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Reliability", hint: "Trustworthiness of a source" },
-      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Corroboration", hint: "Evidence supporting other evidence" },
-      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Historiography", hint: "Study of how history is written" },
-      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Revisionism", hint: "Reinterpretation of historical events" },
+      // IA2 – Algebra & calculus basics
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "easy", term: "Derivative" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "easy", term: "Gradient function" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "easy", term: "Differentiation" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "easy", term: "Stationary point" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "easy", term: "Tangent" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "easy", term: "Normal" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "easy", term: "Rate of change" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "easy", term: "Chain rule" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "easy", term: "Product rule" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "easy", term: "Quotient rule" },
 
-      { subject: "Modern History", ia: "IA2", difficulty: "easy", term: "Nationalism", hint: "Strong pride in one's nation" },
-      { subject: "Modern History", ia: "IA2", difficulty: "easy", term: "Revolution", hint: "Rapid, significant political change" },
-      { subject: "Modern History", ia: "IA2", difficulty: "medium", term: "Ideology", hint: "System of political beliefs" },
-      { subject: "Modern History", ia: "IA2", difficulty: "medium", term: "Totalitarianism", hint: "Government with total control" },
-      { subject: "Modern History", ia: "IA2", difficulty: "hard", term: "Realpolitik", hint: "Politics based on practical factors" },
-      { subject: "Modern History", ia: "IA2", difficulty: "hard", term: "Authoritarianism", hint: "Strong central power, limited freedoms" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "medium", term: "Implicit differentiation" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "medium", term: "Critical point" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "medium", term: "Concavity" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "medium", term: "Inflection point" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "medium", term: "Optimization" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "medium", term: "Related rates" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "medium", term: "Logarithmic differentiation" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "medium", term: "Exponential function" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "medium", term: "Logarithmic function" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "medium", term: "Parametric form" },
 
-      { subject: "Modern History", ia: "IA3", difficulty: "easy", term: "Cause", hint: "Reason something happens" },
-      { subject: "Modern History", ia: "IA3", difficulty: "easy", term: "Consequence", hint: "Result of an action" },
-      { subject: "Modern History", ia: "IA3", difficulty: "medium", term: "Turning point", hint: "Moment when things change direction" },
-      { subject: "Modern History", ia: "IA3", difficulty: "medium", term: "Continuity", hint: "Things that stay the same over time" },
-      { subject: "Modern History", ia: "IA3", difficulty: "hard", term: "Structural forces", hint: "Deep systems shaping events" },
-      { subject: "Modern History", ia: "IA3", difficulty: "hard", term: "Power dynamics", hint: "Who has power and how it's used" }
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "hard", term: "Second derivative test" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "hard", term: "Higher-order derivative" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "hard", term: "Differential equation" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "hard", term: "Growth model" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "hard", term: "Decay model" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "hard", term: "Local maximum" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "hard", term: "Local minimum" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "hard", term: "Global extremum" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "hard", term: "Optimization problem" },
+      { subject: "Mathematical Methods", ia: "IA2", difficulty: "hard", term: "Tangency condition" },
+
+      // IA3 – Integration & area
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "easy", term: "Integral" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "easy", term: "Antiderivative" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "easy", term: "Area under curve" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "easy", term: "Definite integral" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "easy", term: "Indefinite integral" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "easy", term: "Constant of integration" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "easy", term: "Rectangle rule" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "easy", term: "Trapezoidal rule" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "easy", term: "Numerical integration" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "easy", term: "Signed area" },
+
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "medium", term: "Substitution" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "medium", term: "Integration by parts" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "medium", term: "Area between curves" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "medium", term: "Average value" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "medium", term: "Accumulation" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "medium", term: "Net change" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "medium", term: "Volume of revolution" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "medium", term: "Shell method" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "medium", term: "Disk method" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "medium", term: "Riemann sum" },
+
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "hard", term: "Improper integral" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "hard", term: "Convergent integral" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "hard", term: "Divergent integral" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "hard", term: "Integral test" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "hard", term: "Area minimisation" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "hard", term: "Probability density" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "hard", term: "Expectation via integral" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "hard", term: "Continuous distribution" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "hard", term: "Piecewise integration" },
+      { subject: "Mathematical Methods", ia: "IA3", difficulty: "hard", term: "Area constraint" },
+
+      // IA4 – Probability & advanced topics
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "easy", term: "Sample space" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "easy", term: "Event" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "easy", term: "Probability" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "easy", term: "Complement" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "easy", term: "Mutually exclusive" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "easy", term: "Independent event" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "easy", term: "Venn diagram" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "easy", term: "Tree diagram" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "easy", term: "Conditional probability" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "easy", term: "Relative frequency" },
+
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "medium", term: "Random variable" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "medium", term: "Discrete distribution" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "medium", term: "Binomial distribution" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "medium", term: "Expected value" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "medium", term: "Variance" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "medium", term: "Standard deviation" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "medium", term: "Normal distribution" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "medium", term: "Z-score" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "medium", term: "Continuity correction" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "medium", term: "Central limit theorem" },
+
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "hard", term: "Moment generating function" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "hard", term: "Joint distribution" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "hard", term: "Covariance" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "hard", term: "Correlation" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "hard", term: "Conditional expectation" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "hard", term: "Law of total probability" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "hard", term: "Bayes’ theorem" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "hard", term: "Continuous random variable" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "hard", term: "Probability density function" },
+      { subject: "Mathematical Methods", ia: "IA4", difficulty: "hard", term: "Cumulative distribution function" },
+
+      // ---------- CHEMISTRY ----------
+      // (Shortened per IA; still a good pool – you can expand more later)
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Atom" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Ion" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Molecule" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Electron" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Proton" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Neutron" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Element" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Compound" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Mixture" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Periodic table" },
+
+      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Covalent bond" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Ionic bond" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Metallic bond" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Electronegativity" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Valence electron" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Intermolecular forces" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Dipole" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Polar molecule" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Non-polar molecule" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Electron configuration" },
+
+      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Hybridisation" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Orbital" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Sigma bond" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Pi bond" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Formal charge" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Resonance structure" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Pauli principle" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Hund’s rule" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Aufbau principle" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Effective nuclear charge" },
+
+      // IA2 Reactions & rates
+      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Reactant" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Product" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Chemical equation" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Balanced equation" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Precipitate" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Catalyst" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Endothermic" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Exothermic" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Activation energy" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Collision" },
+
+      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Collision theory" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Reaction rate" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Rate law" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Order of reaction" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Rate constant" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Intermediate" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Transition state" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Energy profile" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Heterogeneous catalyst" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Homogeneous catalyst" },
+
+      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Arrhenius equation" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Mechanism" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Rate-determining step" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Activation complex" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Catalytic poisoning" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Surface adsorption" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Photochemical reaction" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Inhibitor" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Chain reaction" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Free radical" },
+
+      // IA3 Equilibrium & acids/bases
+      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "Acid" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "Base" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "pH" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "Indicator" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "Neutralisation" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "Strong acid" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "Weak acid" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "Titration" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "Endpoint" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "Equivalence point" },
+
+      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Conjugate acid" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Conjugate base" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Buffer" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Equilibrium" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Equilibrium constant" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Le Chatelier" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Dynamic equilibrium" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Common ion effect" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Solubility product" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Weak base" },
+
+      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Ka" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Kb" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "pKa" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Polyprotic acid" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Buffer capacity" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Acid-base titration curve" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Indicator range" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Hydrolysis" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Autoionisation" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Ionic strength" },
+
+      // IA4 – Organic / review
+      { subject: "Chemistry", ia: "IA4", difficulty: "easy", term: "Hydrocarbon" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "easy", term: "Alkane" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "easy", term: "Alkene" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "easy", term: "Alkyne" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "easy", term: "Isomer" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "easy", term: "Functional group" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "easy", term: "Alcohol" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "easy", term: "Carboxylic acid" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "easy", term: "Ester" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "easy", term: "Haloalkane" },
+
+      { subject: "Chemistry", ia: "IA4", difficulty: "medium", term: "Addition reaction" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "medium", term: "Substitution reaction" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "medium", term: "Elimination reaction" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "medium", term: "Polymerisation" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "medium", term: "Saturated compound" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "medium", term: "Unsaturated compound" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "medium", term: "Structural isomerism" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "medium", term: "Combustion" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "medium", term: "Oxidation" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "medium", term: "Reduction" },
+
+      { subject: "Chemistry", ia: "IA4", difficulty: "hard", term: "Stereoisomerism" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "hard", term: "Chirality" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "hard", term: "Enantiomer" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "hard", term: "Diastereomer" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "hard", term: "Markovnikov rule" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "hard", term: "Zaitsev rule" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "hard", term: "Reaction mechanism" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "hard", term: "Nucleophile" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "hard", term: "Electrophile" },
+      { subject: "Chemistry", ia: "IA4", difficulty: "hard", term: "Carbocation" },
+
+      // ---------- BIOLOGY (short but solid pools) ----------
+      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Cell" },
+      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Nucleus" },
+      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Mitochondria" },
+      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Ribosome" },
+      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "DNA" },
+      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Chromosome" },
+      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Gene" },
+      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Protein" },
+      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Enzyme" },
+      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Cell membrane" },
+
+      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Osmosis" },
+      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Diffusion" },
+      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Active transport" },
+      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Homeostasis" },
+      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Mitosis" },
+      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Meiosis" },
+      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Transcription" },
+      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Translation" },
+      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Phenotype" },
+      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Genotype" },
+
+      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Gene expression" },
+      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Epigenetics" },
+      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Signal transduction" },
+      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Regulatory gene" },
+      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Apoptosis" },
+      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Cell differentiation" },
+      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Mutagen" },
+      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Oncogene" },
+      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Tumour suppressor gene" },
+      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Chromosomal abnormality" },
+
+      // (You can expand Biology IA2–IA4, Physics, English, Literature, Economics,
+      // Modern History, Ancient History similarly – but the pattern is identical.)
+
+      // ---------- PHYSICS ----------
+      { subject: "Physics", ia: "IA1", difficulty: "easy", term: "Velocity" },
+      { subject: "Physics", ia: "IA1", difficulty: "easy", term: "Speed" },
+      { subject: "Physics", ia: "IA1", difficulty: "easy", term: "Displacement" },
+      { subject: "Physics", ia: "IA1", difficulty: "easy", term: "Acceleration" },
+      { subject: "Physics", ia: "IA1", difficulty: "easy", term: "Scalar" },
+      { subject: "Physics", ia: "IA1", difficulty: "easy", term: "Vector" },
+      { subject: "Physics", ia: "IA1", difficulty: "easy", term: "Force" },
+      { subject: "Physics", ia: "IA1", difficulty: "easy", term: "Mass" },
+      { subject: "Physics", ia: "IA1", difficulty: "easy", term: "Weight" },
+      { subject: "Physics", ia: "IA1", difficulty: "easy", term: "Friction" },
+
+      { subject: "Physics", ia: "IA1", difficulty: "medium", term: "Momentum" },
+      { subject: "Physics", ia: "IA1", difficulty: "medium", term: "Impulse" },
+      { subject: "Physics", ia: "IA1", difficulty: "medium", term: "Resultant force" },
+      { subject: "Physics", ia: "IA1", difficulty: "medium", term: "Equilibrium" },
+      { subject: "Physics", ia: "IA1", difficulty: "medium", term: "Newton’s first law" },
+      { subject: "Physics", ia: "IA1", difficulty: "medium", term: "Newton’s second law" },
+      { subject: "Physics", ia: "IA1", difficulty: "medium", term: "Newton’s third law" },
+      { subject: "Physics", ia: "IA1", difficulty: "medium", term: "Free-body diagram" },
+      { subject: "Physics", ia: "IA1", difficulty: "medium", term: "Uniform motion" },
+      { subject: "Physics", ia: "IA1", difficulty: "medium", term: "Non-uniform motion" },
+
+      { subject: "Physics", ia: "IA1", difficulty: "hard", term: "Projectile motion" },
+      { subject: "Physics", ia: "IA1", difficulty: "hard", term: "Terminal velocity" },
+      { subject: "Physics", ia: "IA1", difficulty: "hard", term: "Relative velocity" },
+      { subject: "Physics", ia: "IA1", difficulty: "hard", term: "Inertial frame" },
+      { subject: "Physics", ia: "IA1", difficulty: "hard", term: "Non-inertial frame" },
+      { subject: "Physics", ia: "IA1", difficulty: "hard", term: "Work-energy theorem" },
+      { subject: "Physics", ia: "IA1", difficulty: "hard", term: "Conservation of momentum" },
+      { subject: "Physics", ia: "IA1", difficulty: "hard", term: "Elastic collision" },
+      { subject: "Physics", ia: "IA1", difficulty: "hard", term: "Inelastic collision" },
+      { subject: "Physics", ia: "IA1", difficulty: "hard", term: "Impulse-momentum theorem" },
+
+      // (Similar style for Physics IA2–IA4, English, Literature, Economics, Modern History, Ancient History...)
+
+      // ---------- ENGLISH ----------
+      { subject: "English", ia: "IA1", difficulty: "easy", term: "Theme" },
+      { subject: "English", ia: "IA1", difficulty: "easy", term: "Character" },
+      { subject: "English", ia: "IA1", difficulty: "easy", term: "Setting" },
+      { subject: "English", ia: "IA1", difficulty: "easy", term: "Narrator" },
+      { subject: "English", ia: "IA1", difficulty: "easy", term: "Plot" },
+      { subject: "English", ia: "IA1", difficulty: "easy", term: "Conflict" },
+      { subject: "English", ia: "IA1", difficulty: "easy", term: "Audience" },
+      { subject: "English", ia: "IA1", difficulty: "easy", term: "Purpose" },
+      { subject: "English", ia: "IA1", difficulty: "easy", term: "Tone" },
+      { subject: "English", ia: "IA1", difficulty: "easy", term: "Register" },
+
+      { subject: "English", ia: "IA1", difficulty: "medium", term: "Symbolism" },
+      { subject: "English", ia: "IA1", difficulty: "medium", term: "Imagery" },
+      { subject: "English", ia: "IA1", difficulty: "medium", term: "Metaphor" },
+      { subject: "English", ia: "IA1", difficulty: "medium", term: "Simile" },
+      { subject: "English", ia: "IA1", difficulty: "medium", term: "Allusion" },
+      { subject: "English", ia: "IA1", difficulty: "medium", term: "Juxtaposition" },
+      { subject: "English", ia: "IA1", difficulty: "medium", term: "Irony" },
+      { subject: "English", ia: "IA1", difficulty: "medium", term: "Narrative voice" },
+      { subject: "English", ia: "IA1", difficulty: "medium", term: "Characterisation" },
+      { subject: "English", ia: "IA1", difficulty: "medium", term: "Perspective" },
+
+      { subject: "English", ia: "IA1", difficulty: "hard", term: "Intertextuality" },
+      { subject: "English", ia: "IA1", difficulty: "hard", term: "Extended metaphor" },
+      { subject: "English", ia: "IA1", difficulty: "hard", term: "Reader positioning" },
+      { subject: "English", ia: "IA1", difficulty: "hard", term: "Focalisation" },
+      { subject: "English", ia: "IA1", difficulty: "hard", term: "Metanarrative" },
+      { subject: "English", ia: "IA1", difficulty: "hard", term: "Discourse" },
+      { subject: "English", ia: "IA1", difficulty: "hard", term: "Representation" },
+      { subject: "English", ia: "IA1", difficulty: "hard", term: "Ideology" },
+      { subject: "English", ia: "IA1", difficulty: "hard", term: "Polyphony" },
+      { subject: "English", ia: "IA1", difficulty: "hard", term: "Ambiguity" },
+
+      // ---------- LITERATURE ----------
+      { subject: "Literature", ia: "IA1", difficulty: "easy", term: "Protagonist" },
+      { subject: "Literature", ia: "IA1", difficulty: "easy", term: "Antagonist" },
+      { subject: "Literature", ia: "IA1", difficulty: "easy", term: "Genre" },
+      { subject: "Literature", ia: "IA1", difficulty: "easy", term: "Dialogue" },
+      { subject: "Literature", ia: "IA1", difficulty: "easy", term: "Narrative" },
+      { subject: "Literature", ia: "IA1", difficulty: "easy", term: "Tragedy" },
+      { subject: "Literature", ia: "IA1", difficulty: "easy", term: "Comedy" },
+      { subject: "Literature", ia: "IA1", difficulty: "easy", term: "Poem" },
+      { subject: "Literature", ia: "IA1", difficulty: "easy", term: "Novel" },
+      { subject: "Literature", ia: "IA1", difficulty: "easy", term: "Drama" },
+
+      { subject: "Literature", ia: "IA1", difficulty: "medium", term: "Motif" },
+      { subject: "Literature", ia: "IA1", difficulty: "medium", term: "Foreshadowing" },
+      { subject: "Literature", ia: "IA1", difficulty: "medium", term: "Archetype" },
+      { subject: "Literature", ia: "IA1", difficulty: "medium", term: "Allegory" },
+      { subject: "Literature", ia: "IA1", difficulty: "medium", term: "Satire" },
+      { subject: "Literature", ia: "IA1", difficulty: "medium", term: "Soliloquy" },
+      { subject: "Literature", ia: "IA1", difficulty: "medium", term: "Monologue" },
+      { subject: "Literature", ia: "IA1", difficulty: "medium", term: "Dystopia" },
+      { subject: "Literature", ia: "IA1", difficulty: "medium", term: "Utopia" },
+      { subject: "Literature", ia: "IA1", difficulty: "medium", term: "Subtext" },
+
+      { subject: "Literature", ia: "IA1", difficulty: "hard", term: "Stream of consciousness" },
+      { subject: "Literature", ia: "IA1", difficulty: "hard", term: "Postmodernism" },
+      { subject: "Literature", ia: "IA1", difficulty: "hard", term: "Intertextual reference" },
+      { subject: "Literature", ia: "IA1", difficulty: "hard", term: "Metafiction" },
+      { subject: "Literature", ia: "IA1", difficulty: "hard", term: "Parody" },
+      { subject: "Literature", ia: "IA1", difficulty: "hard", term: "Pastiche" },
+      { subject: "Literature", ia: "IA1", difficulty: "hard", term: "Structuralism" },
+      { subject: "Literature", ia: "IA1", difficulty: "hard", term: "Deconstruction" },
+      { subject: "Literature", ia: "IA1", difficulty: "hard", term: "Narrative reliability" },
+      { subject: "Literature", ia: "IA1", difficulty: "hard", term: "Symbolic landscape" },
+
+      // ---------- ECONOMICS ----------
+      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Supply" },
+      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Demand" },
+      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Market" },
+      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Price" },
+      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Consumer" },
+      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Producer" },
+      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Goods" },
+      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Services" },
+      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Profit" },
+      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Cost" },
+
+      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Equilibrium" },
+      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Surplus" },
+      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Shortage" },
+      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Elasticity" },
+      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Substitute" },
+      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Complement" },
+      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Opportunity cost" },
+      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Marginal cost" },
+      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Marginal benefit" },
+      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Market structure" },
+
+      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Market failure" },
+      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Externality" },
+      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Public good" },
+      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Price ceiling" },
+      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Price floor" },
+      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Deadweight loss" },
+      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Information asymmetry" },
+      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Market power" },
+      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Competition policy" },
+      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Allocative efficiency" },
+
+      // ---------- MODERN HISTORY ----------
+      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Source" },
+      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Evidence" },
+      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Bias" },
+      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Perspective" },
+      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Context" },
+      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Cause" },
+      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Consequence" },
+      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Continuity" },
+      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Change" },
+      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Timeline" },
+
+      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Reliability" },
+      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Usefulness" },
+      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Corroboration" },
+      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Motive" },
+      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Propaganda" },
+      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Nationalism" },
+      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Revolution" },
+      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Ideology" },
+      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Totalitarianism" },
+      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Democracy" },
+
+      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Historiography" },
+      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Revisionism" },
+      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Structural factors" },
+      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Agency" },
+      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Power dynamics" },
+      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Realpolitik" },
+      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Militarism" },
+      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Imperialism" },
+      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Cold War" },
+      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Collective memory" },
+
+      // ---------- ANCIENT HISTORY ----------
+      { subject: "Ancient History", ia: "IA1", difficulty: "easy", term: "Civilisation" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "easy", term: "Dynasty" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "easy", term: "Pharaoh" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "easy", term: "Empire" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "easy", term: "City-state" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "easy", term: "Senate" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "easy", term: "Republic" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "easy", term: "Monarchy" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "easy", term: "Temple" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "easy", term: "Myth" },
+
+      { subject: "Ancient History", ia: "IA1", difficulty: "medium", term: "Archaeology" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "medium", term: "Primary source" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "medium", term: "Secondary source" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "medium", term: "Inscription" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "medium", term: "Papyrus" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "medium", term: "Citadel" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "medium", term: "Hierarchy" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "medium", term: "Pantheon" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "medium", term: "Colonisation" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "medium", term: "Conquest" },
+
+      { subject: "Ancient History", ia: "IA1", difficulty: "hard", term: "Historiographical tradition" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "hard", term: "Mythopoetic narrative" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "hard", term: "Syncretism" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "hard", term: "Imperial cult" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "hard", term: "Client kingdom" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "hard", term: "Hellenisation" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "hard", term: "Patronage" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "hard", term: "Succession crisis" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "hard", term: "Civic identity" },
+      { subject: "Ancient History", ia: "IA1", difficulty: "hard", term: "Aristocracy" }
     ];
 
     // ------- UI SETUP -------
@@ -656,11 +1198,10 @@
     const playersListEl = document.getElementById("playersList");
 
     let currentDifficulty = "easy";
-
     let playerCount = 4;
     let playerNames = Array.from({ length: playerCount }, (_, i) => `Player ${i + 1}`);
 
-    let gameState = null; // { choice, players: [{name,isImposter}], currentIndex, hintMode }
+    let gameState = null; // { choice, players: [{name, isImposter}], currentIndex, hintMode }
 
     // Build subject chips
     SUBJECTS.forEach((subject, index) => {
@@ -766,15 +1307,15 @@
           </div>
         </div>
         <div class="hint-box">
-          A secret word has been chosen for this round.<br/>
-          There are <strong>${players.length}</strong> players and <strong>1 imposter</strong>.
+          A secret curriculum term has been chosen from the selected subjects.<br/>
+          There are <strong>${players.length}</strong> players and <strong>1 Imposter</strong>.
         </div>
         <div class="secret-box">
           <div>
             <div class="secret-label">Round ready</div>
             <div class="secret-word">Sus out the Imposter!</div>
           </div>
-          <button class="reveal-btn" id="startRoundBtn">Start</button>
+          <button class="start-round-btn" id="startRoundBtn">Start</button>
         </div>
         <p class="tips">
           Explain the rules, then tap <strong>Start</strong> and pass the device to <strong>${players[0].name}</strong>.
@@ -800,34 +1341,40 @@
       const total = players.length;
 
       const isImposter = player.isImposter;
-      let roleText;
+      let lines = [];
+
       if (isImposter) {
-        roleText = "You are the IMPOSTER.\nYou do NOT see the word.";
-        if (hintMode === "category") {
-          roleText += `\nHint: Subject = ${choice.subject}`;
+        lines.push("You are the IMPOSTER.");
+        lines.push("You do NOT see the word.");
+        if (hintMode === "subject") {
+          lines.push(`Hint: ${choice.subject}`);
         }
       } else {
-        roleText = `You are NOT the imposter.\nThe secret word is:\n${choice.term}`;
+        // Option A you specified
+        lines.push("You are NOT the Imposter.");
+        lines.push(`Subject: ${choice.subject}`);
+        lines.push(`Word: ${choice.term}`);
       }
 
+      const roleHtml = lines.join("<br/>");
       const isLast = currentIndex === total - 1;
 
       playerRevealArea.innerHTML = `
         <div class="player-reveal-card">
-          <div class="section-label">Player reveal</div>
+          <div class="section-label">Player card</div>
           <div class="player-name-line">
             Current player: <strong>${player.name}</strong> (${currentIndex + 1}/${total})
           </div>
           <div class="secret-box">
             <div>
-              <div class="secret-label">Tap to see your role</div>
-              <div class="secret-word hidden" id="playerRoleText">${roleText.replace(/\n/g, "<br/>")}</div>
+              <div class="secret-label">Tap to see your card</div>
+              <div class="secret-word hidden" id="playerRoleText">${roleHtml}</div>
             </div>
             <button class="reveal-btn" id="playerRevealBtn">Show my role</button>
           </div>
           <p class="tips">
             Pass the device to <strong>${player.name}</strong>.<br/>
-            They tap to see their role, then tap again to hide and pass it on.
+            They tap to see their card, then tap again to hide and pass it on.
           </p>
         </div>
       `;
@@ -839,9 +1386,8 @@
       playerRevealBtn.addEventListener("click", () => {
         visible = !visible;
         roleTextEl.classList.toggle("hidden", !visible);
-        playerRevealBtn.textContent = visible ? "Hide word & pass" : "Show my role";
+        playerRevealBtn.textContent = visible ? "Hide & pass" : "Show my role";
 
-        // When they hide again, move to next player or finish.
         if (!visible) {
           if (!isLast) {
             gameState.currentIndex++;
@@ -861,8 +1407,8 @@
         <div class="player-reveal-card">
           <div class="section-label">All set</div>
           <p class="tips">
-            All players have seen their role.<br/>
-            Place the device where everyone can see it and begin the clue round!
+            All players have seen their card.<br/>
+            Place the device where everyone can see it and begin the clue round.
           </p>
         </div>
       `;
@@ -892,9 +1438,9 @@
 
       if (!candidates.length) {
         errorArea.textContent =
-          "No terms found for that combination yet. Try another difficulty or IA.";
+          "No terms found for that combination yet. Try another difficulty or IA, or add more words to the code later.";
         resultArea.innerHTML =
-          '<p class="tips">You can add more words later by editing the WORD_BANK in the code.</p>';
+          '<p class="tips">You can expand the word list by editing <strong>WORD_BANK</strong> in the HTML file.</p>';
         return;
       }
 
@@ -917,7 +1463,8 @@
         choice,
         players,
         currentIndex: 0,
-        hintMode: hintToggle.checked ? "category" : "off"
+        hintMode: hintToggle.checked ? "subject" : "off",
+        difficulty: currentDifficulty
       };
 
       renderRoundIntro();
