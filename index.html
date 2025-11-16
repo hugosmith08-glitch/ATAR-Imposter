@@ -181,6 +181,64 @@
       color: #e5e7eb;
     }
 
+    .players-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .player-count-btn {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      cursor: pointer;
+      font-size: 1.3rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #playerCountLabel {
+      font-size: 0.9rem;
+      color: #374151;
+    }
+
+    .players-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+
+    .player-item label {
+      display: flex;
+      flex-direction: column;
+      font-size: 0.8rem;
+      color: #4b5563;
+    }
+
+    .player-input {
+      margin-top: 0.15rem;
+      padding: 0.3rem 0.45rem;
+      border-radius: 0.5rem;
+      border: 1px solid #d1d5db;
+      font-size: 0.85rem;
+      background: #ffffff;
+    }
+
+    .hint-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+
     .generate-btn {
       margin-top: 0.75rem;
       width: 100%;
@@ -284,7 +342,7 @@
       border: none;
       background: #111827;
       color: #f9fafb;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       cursor: pointer;
       white-space: nowrap;
     }
@@ -293,6 +351,47 @@
       font-size: 0.8rem;
       color: #6b7280;
       line-height: 1.4;
+    }
+
+    .start-round-btn {
+      margin-top: 0.5rem;
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      border-radius: 0.75rem;
+      border: 1px solid #e5e7eb;
+      background: #22c55e;
+      color: #052e16;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .player-reveal-card {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px dashed #e5e7eb;
+    }
+
+    .player-name-line {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .next-player-btn {
+      margin-top: 0.4rem;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.75rem;
+      border: none;
+      background: #111827;
+      color: #f9fafb;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+
+    .next-player-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
     }
   </style>
 </head>
@@ -349,21 +448,41 @@
           </div>
         </div>
 
+        <div class="control-group">
+          <div class="section-label">Players (4+)</div>
+          <div class="players-row">
+            <button type="button" class="player-count-btn" id="decreasePlayers">−</button>
+            <span id="playerCountLabel">4 players</span>
+            <button type="button" class="player-count-btn" id="increasePlayers">+</button>
+          </div>
+          <div class="players-list" id="playersList"></div>
+        </div>
+
+        <div class="control-group">
+          <div class="section-label">Hint mode</div>
+          <label class="hint-toggle">
+            <input type="checkbox" id="hintToggle" />
+            Give the imposter a subject hint
+          </label>
+        </div>
+
         <button class="generate-btn" id="generateBtn">
-          🎲 Generate Word
+          🎲 Generate Word & Start Round
         </button>
         <div class="error" id="errorArea"></div>
       </section>
 
       <!-- RIGHT: RESULT -->
       <section class="card">
-        <h2>2. Secret Word</h2>
+        <h2>2. Pass & Play</h2>
         <div id="resultArea">
           <p class="tips">
-            Choose your settings, then hit <strong>Generate Word</strong>.<br />
-            Use this in your Imposter game:
-            <br />– Show the hint to everyone<br />– Reveal the word privately to
-            all players except the imposter.
+            1) Choose subjects, IA, difficulty and players.<br/>
+            2) Click <strong>Generate Word & Start Round</strong>.<br/>
+            3) A secret word is chosen and one random player is the imposter.<br/>
+            4) Pass the device. Each player taps to see their role:<br/>
+            – Most players see the <strong>word</strong>.<br/>
+            – One player sees <strong>IMPOSTER</strong> (with an optional subject hint). 
           </p>
         </div>
       </section>
@@ -526,8 +645,21 @@
     const generateBtn = document.getElementById("generateBtn");
     const errorArea = document.getElementById("errorArea");
     const resultArea = document.getElementById("resultArea");
+    const hintToggle = document.getElementById("hintToggle");
+
+    const MIN_PLAYERS = 4;
+    const MAX_PLAYERS = 12;
+    const decreasePlayersBtn = document.getElementById("decreasePlayers");
+    const increasePlayersBtn = document.getElementById("increasePlayers");
+    const playerCountLabel = document.getElementById("playerCountLabel");
+    const playersListEl = document.getElementById("playersList");
 
     let currentDifficulty = "easy";
+
+    let playerCount = 4;
+    let playerNames = Array.from({ length: playerCount }, (_, i) => `Player ${i + 1}`);
+
+    let gameState = null; // { choice, players: [{name,isImposter}], currentIndex, hintMode }
 
     // Build subject chips
     SUBJECTS.forEach((subject, index) => {
@@ -563,6 +695,178 @@
       ).map((input) => input.value);
     }
 
+    // ------- PLAYER SETUP -------
+
+    function syncNamesFromInputs() {
+      const inputs = playersListEl.querySelectorAll("input.player-input");
+      inputs.forEach((input) => {
+        const index = Number(input.dataset.index);
+        const value = input.value.trim();
+        playerNames[index] = value || `Player ${index + 1}`;
+      });
+    }
+
+    function renderPlayers() {
+      playerCountLabel.textContent = playerCount + (playerCount === 1 ? " player" : " players");
+      playersListEl.innerHTML = "";
+      for (let i = 0; i < playerCount; i++) {
+        const item = document.createElement("div");
+        item.className = "player-item";
+        const label = document.createElement("label");
+        label.textContent = "Player " + (i + 1);
+        const input = document.createElement("input");
+        input.type = "text";
+        input.className = "player-input";
+        input.dataset.index = i.toString();
+        input.value = playerNames[i] || `Player ${i + 1}`;
+        label.appendChild(input);
+        item.appendChild(label);
+        playersListEl.appendChild(item);
+      }
+    }
+
+    decreasePlayersBtn.addEventListener("click", () => {
+      if (playerCount <= MIN_PLAYERS) return;
+      syncNamesFromInputs();
+      playerCount--;
+      playerNames = playerNames.slice(0, playerCount);
+      renderPlayers();
+    });
+
+    increasePlayersBtn.addEventListener("click", () => {
+      if (playerCount >= MAX_PLAYERS) return;
+      syncNamesFromInputs();
+      playerCount++;
+      if (!playerNames[playerCount - 1]) {
+        playerNames[playerCount - 1] = `Player ${playerCount}`;
+      }
+      renderPlayers();
+    });
+
+    function getPlayerNames() {
+      syncNamesFromInputs();
+      return playerNames.slice(0, playerCount);
+    }
+
+    renderPlayers();
+
+    // ------- PASS & PLAY FLOW -------
+
+    function renderRoundIntro() {
+      const { choice, players } = gameState;
+      const difficultyLabel = choice.difficulty.charAt(0).toUpperCase() + choice.difficulty.slice(1);
+
+      const html = `
+        <div class="result-header">
+          <div class="result-tags">
+            <span class="result-tag">${choice.subject}</span>
+            <span class="result-tag">${choice.ia}</span>
+            <span class="result-tag difficulty-pill">${difficultyLabel}</span>
+          </div>
+        </div>
+        <div class="hint-box">
+          A secret word has been chosen for this round.<br/>
+          There are <strong>${players.length}</strong> players and <strong>1 imposter</strong>.
+        </div>
+        <div class="secret-box">
+          <div>
+            <div class="secret-label">Round ready</div>
+            <div class="secret-word">Sus out the Imposter!</div>
+          </div>
+          <button class="reveal-btn" id="startRoundBtn">Start</button>
+        </div>
+        <p class="tips">
+          Explain the rules, then tap <strong>Start</strong> and pass the device to <strong>${players[0].name}</strong>.
+        </p>
+        <div id="playerRevealArea"></div>
+      `;
+
+      resultArea.innerHTML = html;
+
+      const startBtn = document.getElementById("startRoundBtn");
+      startBtn.addEventListener("click", () => {
+        gameState.currentIndex = 0;
+        renderPlayerReveal();
+      });
+    }
+
+    function renderPlayerReveal() {
+      const playerRevealArea = document.getElementById("playerRevealArea");
+      if (!playerRevealArea || !gameState) return;
+
+      const { choice, players, currentIndex, hintMode } = gameState;
+      const player = players[currentIndex];
+      const total = players.length;
+
+      const isImposter = player.isImposter;
+      let roleText;
+      if (isImposter) {
+        roleText = "You are the IMPOSTER.\nYou do NOT see the word.";
+        if (hintMode === "category") {
+          roleText += `\nHint: Subject = ${choice.subject}`;
+        }
+      } else {
+        roleText = `You are NOT the imposter.\nThe secret word is:\n${choice.term}`;
+      }
+
+      const isLast = currentIndex === total - 1;
+
+      playerRevealArea.innerHTML = `
+        <div class="player-reveal-card">
+          <div class="section-label">Player reveal</div>
+          <div class="player-name-line">
+            Current player: <strong>${player.name}</strong> (${currentIndex + 1}/${total})
+          </div>
+          <div class="secret-box">
+            <div>
+              <div class="secret-label">Tap to see your role</div>
+              <div class="secret-word hidden" id="playerRoleText">${roleText.replace(/\n/g, "<br/>")}</div>
+            </div>
+            <button class="reveal-btn" id="playerRevealBtn">Show my role</button>
+          </div>
+          <p class="tips">
+            Pass the device to <strong>${player.name}</strong>.<br/>
+            They tap to see their role, then tap again to hide and pass it on.
+          </p>
+        </div>
+      `;
+
+      const roleTextEl = document.getElementById("playerRoleText");
+      const playerRevealBtn = document.getElementById("playerRevealBtn");
+      let visible = false;
+
+      playerRevealBtn.addEventListener("click", () => {
+        visible = !visible;
+        roleTextEl.classList.toggle("hidden", !visible);
+        playerRevealBtn.textContent = visible ? "Hide word & pass" : "Show my role";
+
+        // When they hide again, move to next player or finish.
+        if (!visible) {
+          if (!isLast) {
+            gameState.currentIndex++;
+            renderPlayerReveal();
+          } else {
+            renderRoundComplete();
+          }
+        }
+      });
+    }
+
+    function renderRoundComplete() {
+      const playerRevealArea = document.getElementById("playerRevealArea");
+      if (!playerRevealArea) return;
+
+      playerRevealArea.innerHTML = `
+        <div class="player-reveal-card">
+          <div class="section-label">All set</div>
+          <p class="tips">
+            All players have seen their role.<br/>
+            Place the device where everyone can see it and begin the clue round!
+          </p>
+        </div>
+      `;
+    }
+
     // ------- GENERATION LOGIC -------
 
     generateBtn.addEventListener("click", () => {
@@ -596,43 +900,26 @@
       const choice =
         candidates[Math.floor(Math.random() * candidates.length)];
 
-      const resultHtml = `
-        <div class="result-header">
-          <div class="result-tags">
-            <span class="result-tag">${choice.subject}</span>
-            <span class="result-tag">${choice.ia}</span>
-            <span class="result-tag difficulty-pill">${currentDifficulty
-              .charAt(0)
-              .toUpperCase() + currentDifficulty.slice(1)}</span>
-          </div>
-        </div>
-        <div class="hint-box">
-          <strong>Hint:</strong> ${choice.hint}
-        </div>
-        <div class="secret-box">
-          <div>
-            <div class="secret-label">Secret word</div>
-            <div class="secret-word hidden" id="secretWord">${choice.term}</div>
-          </div>
-          <button class="reveal-btn" id="revealBtn">Reveal word</button>
-        </div>
-        <p class="tips">
-          Show the <strong>hint</strong> to everyone.<br/>
-          Reveal the <strong>secret word</strong> one by one to players (except the imposter).
-        </p>
-      `;
+      const names = getPlayerNames();
+      if (names.length < 4) {
+        errorArea.textContent = "You need at least 4 players.";
+        return;
+      }
 
-      resultArea.innerHTML = resultHtml;
+      const imposterIndex = Math.floor(Math.random() * names.length);
+      const players = names.map((name, index) => ({
+        name,
+        isImposter: index === imposterIndex
+      }));
 
-      const revealBtn = document.getElementById("revealBtn");
-      const secretWordEl = document.getElementById("secretWord");
-      let hidden = true;
+      gameState = {
+        choice,
+        players,
+        currentIndex: 0,
+        hintMode: hintToggle.checked ? "category" : "off"
+      };
 
-      revealBtn.addEventListener("click", () => {
-        hidden = !hidden;
-        secretWordEl.classList.toggle("hidden", hidden);
-        revealBtn.textContent = hidden ? "Reveal word" : "Hide word";
-      });
+      renderRoundIntro();
     });
   </script>
 </body>
