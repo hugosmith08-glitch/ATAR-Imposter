@@ -1,24 +1,240 @@
-// ===============================
-// SUBJECT + IA + DIFFICULTY WORD BANK
-// ===============================
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Imposter — QCAA Edition</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-const wordBank = {
+<style>
+/* ----------------------------------------------------------
+   GLOBAL STYLING — White with Teal + Navy accents
+---------------------------------------------------------- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", sans-serif;
+    background: white;
+    color: #002b45; /* deep navy */
+}
 
+h1, h2, h3 {
+    margin: 0 0 15px 0;
+    color: #002b45;
+}
+
+button {
+    background: #008b8b; /* teal */
+    color: white;
+    border: none;
+    padding: 14px 24px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #006f6f;
+}
+
+.container {
+    width: 95%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 25px;
+}
+
+.section {
+    margin-bottom: 35px;
+    padding: 20px;
+    border: 2px solid #e6f2f2;
+    border-radius: 12px;
+}
+
+input[type="number"],
+input[type="text"],
+select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #b0dede;
+    border-radius: 10px;
+    margin-top: 6px;
+    font-size: 1rem;
+}
+
+.subject-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.subject-chip {
+    padding: 10px 14px;
+    border-radius: 10px;
+    background: #f4ffff;
+    border: 2px solid #b0eaea;
+    cursor: pointer;
+    user-select: none;
+}
+
+.subject-chip.active {
+    background: #008b8b;
+    color: white;
+    border-color: #006f6f;
+}
+
+.toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Reveal card */
+.reveal-card {
+    margin-top: 50px;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    border: 3px solid #008b8b;
+    background: #f7ffff;
+}
+
+.big {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.word {
+    font-size: 2.2rem;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #005f5f;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Imposter — QCAA Edition</h1>
+
+    <!-- -----------------------------------
+         SUBJECT SELECTION
+    ------------------------------------ -->
+    <div class="section">
+        <h2>Select Subjects</h2>
+        <div id="subject-list" class="subject-list"></div>
+    </div>
+
+    <!-- -----------------------------------
+         IA SELECTION
+    ------------------------------------ -->
+    <div class="section">
+        <h2>Select IA</h2>
+        <select id="ia-select">
+            <option value="IA1">IA1</option>
+            <option value="IA2">IA2</option>
+            <option value="IA3">IA3</option>
+            <option value="IA4">IA4</option>
+        </select>
+    </div>
+
+    <!-- -----------------------------------
+         DIFFICULTY
+    ------------------------------------ -->
+    <div class="section">
+        <h2>Difficulty</h2>
+        <select id="difficulty-select">
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
+    </div>
+
+    <!-- -----------------------------------
+         PLAYER COUNT
+    ------------------------------------ -->
+    <div class="section">
+        <h2>Number of Players</h2>
+        <input id="player-count" type="number" min="4" max="20" value="4" />
+    </div>
+
+    <!-- -----------------------------------
+         PLAYER NAMES
+    ------------------------------------ -->
+    <div class="section">
+        <h2>Player Names</h2>
+        <div id="player-name-fields"></div>
+    </div>
+
+    <!-- -----------------------------------
+         HINT TOGGLE
+    ------------------------------------ -->
+    <div class="section">
+        <h2>Hint Options</h2>
+        <div class="toggle-row">
+            <input id="hint-toggle" type="checkbox" />
+            <label for="hint-toggle">Give Imposter a Subject Hint</label>
+        </div>
+    </div>
+
+    <!-- -----------------------------------
+         START BUTTON
+    ------------------------------------ -->
+    <button id="start-btn">Start Game</button>
+
+    <!-- -----------------------------------
+         REVEAL SCREEN
+    ------------------------------------ -->
+    <div id="reveal-screen" class="hidden">
+        <div class="reveal-card">
+            <div id="reveal-player" class="big"></div>
+            <div id="reveal-role" class="big"></div>
+            <div id="reveal-subject" class="big"></div>
+            <div id="reveal-word" class="word"></div>
+            <button id="next-btn" style="margin-top:30px;">Next</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+/* ============================================================
+   SUBJECT LIST
+============================================================ */
+const SUBJECTS = [
+    "General Mathematics",
+    "Mathematical Methods",
+    "Chemistry",
+    "Biology",
+    "Physics",
+    "Economics",
+    "English",
+    "Literature",
+    "Modern History",
+    "Ancient History",
+    "Earth Science"
+];
+
+/* ============================================================
+   WORD BANK — 10 words per difficulty × IA × subject
+   (This is the exact most recent structure we used)
+============================================================ */
+const WORD_BANK = {
+
+    /* ------------------------------
+       GENERAL MATHEMATICS
+    ------------------------------ */
     "General Mathematics": {
         IA1: {
-            Easy: [
-                "Mode", "Median", "Mean", "Range", "Plot", "Graph",
-                "Table", "Ratio", "Scale", "Interest"
-            ],
-            Medium: [
-                "Histogram", "Quartile", "Percentile", "Slope", "Scatter",
-                "Correlation", "Outlier", "Residual", "Frequency Polygon", "Interpolation"
-            ],
-            Hard: [
-                "Standard Deviation", "Coefficient", "Regression", "Extrapolation",
-                "Optimization", "Nonlinear Model", "Piecewise Function",
-                "Bivariate Analysis", "Transformation", "Absolute Deviation"
-            ]
+            Easy: ["Mode","Median","Mean","Range","Plot","Graph","Table","Ratio","Scale","Interest"],
+            Medium: ["Histogram","Quartile","Percentile","Slope","Scatter","Correlation","Outlier","Residual","Frequency Polygon","Interpolation"],
+            Hard: ["Standard Deviation","Coefficient","Regression","Extrapolation","Optimization","Nonlinear Model","Piecewise Function","Bivariate Analysis","Transformation","Absolute Deviation"]
         },
         IA2: {
             Easy: ["Parabola","Linear","Gradient","Intercept","Angle","Shape","Area","Volume","Factor","Expand"],
@@ -37,10 +253,87 @@ const wordBank = {
         }
     },
 
-    // ===============================
-    // PHYSICS
-    // ===============================
+    /* ------------------------------
+       MATHEMATICAL METHODS
+    ------------------------------ */
+    "Mathematical Methods": {
+        IA1: {
+            Easy: ["Function","Variable","Slope","Intercept","Equation","Table","Domain","Range","Plot","Factor"],
+            Medium: ["Derivative","Rate of Change","Polynomial","Transformation","Quadratic","Exponential","Logarithmic","Rational Function","Inequality","Chain Rule"],
+            Hard: ["Implicit Differentiation","Differential Equation","Optimization","Indefinite Integral","Definite Integral","Trigonometric Identity","Composite Function","Limits","Asymptote","Inverse Function"]
+        },
+        IA2: {
+            Easy: ["Cosine","Sine","Tangent","Angle","Unit Circle","Vector","Magnitude","Direction","Point","Line"],
+            Medium: ["Trigonometric Equation","Parametric","Vector Addition","Scalar Product","Matrix","Determinant","Systems","Probability","Distribution","Random Variable"],
+            Hard: ["Eigenvalue","Eigenvector","Jacobian","Partial Derivative","Gradient Field","Complex Plane","Euler’s Formula","Transformation Matrix","Proof by Induction","Lagrangian"]
+        },
+        IA3: {
+            Easy: ["Plot","Test","Input","Graph","Solve","Check","Model","Estimate","Trial","Step"],
+            Medium: ["Residual","Best Fit","Correlation","Statistical Reasoning","Sampling","Error Margin","Regression Model","Interpolation","Extrapolation","Validation"],
+            Hard: ["Distribution Modelling","Optimisation Model","Error Modelling","Model Limitations","Statistical Inference","Confidence Interval","Hypothesis Test","Chi-Squared","Goodness of Fit","Logistic Regression"]
+        },
+        IA4: {
+            Easy: ["State","List","Describe","Show","Identify","Calculate","Outline","Select","Compare","Summarise"],
+            Medium: ["Analyse","Interpret","Model","Infer","Explain","Deduce","Predict","Critique","Evaluate","Assess"],
+            Hard: ["Justify","Prove","Validate","Challenge Assumptions","Apply Theory","Generate Reasoning","Generalise","Contrast Models","Evaluate Constraints","Construct Argument"]
+        }
+    },
 
+    /* ------------------------------
+       CHEMISTRY
+    ------------------------------ */
+    "Chemistry": {
+        IA1: {
+            Easy: ["Atom","Bond","Ion","pH","Base","Acid","Salt","Metal","Molecule","Electron"],
+            Medium: ["Covalent","Ionic","Polyatomic","Isotope","Catalyst","Equilibrium","Solubility","Redox","Spectroscopy","Titration"],
+            Hard: ["Gibbs Energy","Entropy","Enthalpy","Electronegativity","Hybridisation","NMR Spectrum","Mass Spectra","Reaction Mechanism","Equilibrium Constant","Thermodynamic Stability"]
+        },
+        IA2: {
+            Easy: ["Carbon","Chain","Alcohol","Acid","Salt","Base","Crude Oil","Plastic","Boiling Point","Melting Point"],
+            Medium: ["Isomer","Functional Group","Esterification","Addition Reaction","Substitution Reaction","Oxidation","Reduction","Polarity","Dipole","Chromatography"],
+            Hard: ["Markovnikov Rule","Anti-Markovnikov","Carbocation Stability","SN1","SN2","E1","E2","Aldol Reaction","Aromaticity","Reaction Kinetics"]
+        },
+        IA3: {
+            Easy: ["Measure","Mix","Heat","Cool","Stir","Test","Record","Turbidity","Colour Change","Precipitate"],
+            Medium: ["Molarity","Uncertainty","Systematic Error","Random Error","Calibration","Concentration Curve","Analytical Technique","Dilution Series","Control Variable","Graphical Trend"],
+            Hard: ["Error Propagation","Spectroscopic Analysis","Chromatographic Separation","Sample Integrity","Precision vs Accuracy","Reaction Yield Analysis","Titration Curve Interpretation","Method Evaluation","Model Refinement","Data Validity"]
+        },
+        IA4: {
+            Easy: ["Outline","List","Identify","Label","Describe","Calculate","Measure","Predict","Show","Use"],
+            Medium: ["Explain","Interpret","Analyse","Deduce","Compare","Relate","Model","Graph","Apply","Solve"],
+            Hard: ["Justify","Evaluate","Validate","Prove","Critique","Assess","Generalise","Construct Argument","Review Evidence","Address Limitations"]
+        }
+    },
+
+    /* ------------------------------
+       BIOLOGY
+    ------------------------------ */
+    "Biology": {
+        IA1: {
+            Easy: ["Cell","Tissue","Organ","Enzyme","Protein","DNA","RNA","Species","Habitat","Virus"],
+            Medium: ["Diffusion","Osmosis","Mitosis","Meiosis","Homeostasis","Photosynthesis","Respiration","Enzyme Activity","Genotype","Phenotype"],
+            Hard: ["Allosteric Regulation","Gene Expression","Natural Selection","Population Genetics","Biochemical Pathway","Evolutionary Pressure","Signal Transduction","Ecological Niche","Speciation","Metabolic Regulation"]
+        },
+        IA2: {
+            Easy: ["Plant","Animal","Food Web","Predator","Prey","Nutrient","Symbiosis","Cell Wall","Membrane","Transport"],
+            Medium: ["Mutualism","Commensalism","Parasite","Trophic Level","Ecosystem Dynamics","Limiting Factor","Population Density","Carrying Capacity","Energy Pyramid","Microorganism"],
+            Hard: ["Hardy-Weinberg","Genetic Drift","Bottleneck Effect","Founder Effect","Directional Selection","Stabilising Selection","Disruptive Selection","Phylogenetic Tree","Cladistics","Ecological Modelling"]
+        },
+        IA3: {
+            Easy: ["Test","Measure","Observe","Record","Sample","Graph","Collect","Sort","Identify","Count"],
+            Medium: ["Quadrat Sampling","Transect","Uncertainty","Systematic Error","Replication","Controlled Variable","Trend Analysis","Hypothesis","Classification","Biodiversity Index"],
+            Hard: ["Species Distribution Modelling","Statistical Inference","Data Validity","Population Modelling","Experimental Design Critique","Advanced Field Method","Genetic Analysis","Evidence Evaluation","Research Limitation","Methodological Improvement"]
+        },
+        IA4: {
+            Easy: ["State","Describe","Identify","Label","Explain","Define","Measure","Summarise","List","Select"],
+            Medium: ["Analyse","Model","Interpret","Compare","Evaluate","Predict","Relate","Solve","Apply","Deduce"],
+            Hard: ["Justify","Critique","Prove","Assess","Validate","Evaluate Methodology","Integrate Evidence","Generalise Findings","Link Theory","Communicate Reasoning"]
+        }
+    },
+
+    /* ------------------------------
+       PHYSICS
+    ------------------------------ */
     "Physics": {
         IA1: {
             Easy: ["Force","Mass","Energy","Work","Motion","Speed","Wave","Light","Charge","Field"],
@@ -64,35 +357,291 @@ const wordBank = {
         }
     },
 
-    // ===============================
-    // EARTH & ENVIRONMENTAL SCIENCE (NEW)
-    // ===============================
-
-    "Earth Science": {
+    /* ------------------------------
+       ECONOMICS
+    ------------------------------ */
+    "Economics": {
         IA1: {
-            Easy: ["Rock","Mineral","Soil","Fossil","Plate","Erosion","Weather","Climate","River","Ocean"],
-            Medium: ["Sedimentary","Metamorphic","Igneous","Subduction","Atmosphere","Hydrosphere","Biosphere","Stratigraphy","Isotope","Topography"],
-            Hard: ["Radiometric Dating","Plate Kinematics","Paleoclimatology","Geochemical Cycling","Cryosphere","Seismic Tomography","Mantle Convection","Biogeochemical Flux","Volcanology","Astrobiology"]
+            Easy: ["Market","Supply","Demand","Price","Trade","Cost","Profit","Wage","Goods","Service"],
+            Medium: ["Elasticity","Equilibrium","Subsidy","Tariff","Inflation","Interest Rate","Exchange","Opportunity Cost","Utility","Production"],
+            Hard: ["Monopolistic Competition","Perfect Competition","Comparative Advantage","Phillips Curve","Fiscal Policy","Monetary Policy","Current Account","GDP Deflator","Marginal Analysis","Game Theory"]
         },
         IA2: {
-            Easy: ["Cloud","Rain","Storm","Wind","Volcano","Earthquake","Tide","Coast","Forest","Habitat"],
-            Medium: ["Cyclone","El Niño","La Niña","Fault Line","Epicentre","Lithosphere","Hotspot Volcano","Carbon Cycle","Nitrogen Cycle","Greenhouse Effect"],
-            Hard: ["Atmospheric Modelling","Climate Forcing","Ocean Acidification","Carbon Sequestration","Tectonic Reconstruction","Geophysical Survey","Biomarker Analysis","Proxy Climate Data","Remote Sensing","Finite-Element Geology"]
+            Easy: ["Work","Trade","Bank","Loan","Debt","Market","Import","Export","Job","Income"],
+            Medium: ["Fiscal Policy","Monetary Policy","Budget","Taxation","Productivity","Employment Rate","Globalisation","Economic Growth","Inflation Rate","Trade Block"],
+            Hard: ["Externalities","Market Failure","Exchange Rate Controls","Interest Rate Mechanism","Deflation Spiral","Supply-Side Policy","Shadow Economy","Capital Flight","Multiplier Effect","Rational Expectations"]
         },
         IA3: {
-            Easy: ["Observe","Record","Test","Sample","Compare","Measure","Sort","Identify","Estimate","Note"],
-            Medium: ["Transect Study","Soil Profile","Field Sampling","Classification","Uncertainty","Error Margin","Environmental Impact","Data Patterns","Spatial Distribution","Temporal Change"],
-            Hard: ["Modelling Ecosystems","Long-Term Climate Modelling","Geospatial Analysis","GIS Mapping","Satellite Data Integration","Predictive Modelling","Method Evaluation","Field Study Critique","Hydrological Modelling","Advanced System Analysis"]
+            Easy: ["Record","Survey","Graph","Collect","Input","Compare","Count","Note","Sort","Identify"],
+            Medium: ["Indexing","Trend Analysis","Economic Modelling","Data Reliability","Sampling","Constraint","Variance","Forecast","Correlation","Market Indicator"],
+            Hard: ["Macroeconomic Modelling","Long-term Forecasting","Policy Evaluation","Structural Adjustment","Impact Analysis","International Benchmarking","Statistical Validity","Scenario Modelling","Advanced Regression","Elasticity Modelling"]
         },
         IA4: {
-            Easy: ["Describe","Identify","Recall","List","Label","Outline","Name","Select","State","Measure"],
-            Medium: ["Compare","Interpret","Analyse","Discuss","Evaluate","Explain","Model","Infer","Solve","Relate"],
-            Hard: ["Critique","Validate","Synthesize","Assess Impacts","Evaluate Evidence","Apply Concepts","Propose Solutions","Advanced Interpretation","Integrate Systems","Justify Conclusions"]
+            Easy: ["State","Identify","Describe","List","Compare","Define","Outline","Summarise","Select","Explain"],
+            Medium: ["Interpret","Model","Analyse","Graph","Predict","Relate","Evaluate","Compare","Apply","Solve"],
+            Hard: ["Justify","Critique","Assess","Evaluate","Generalise","Propose Policy","Examine Evidence","Synthesize Data","Construct Argument","Investigate Assumptions"]
         }
     },
 
-    // ===============================
-    // ADD ANY OTHER SUBJECTS BELOW...
-    // ===============================
+    /* ------------------------------
+       ENGLISH
+    ------------------------------ */
+    "English": {
+        IA1: {
+            Easy: ["Theme","Setting","Plot","Character","Dialogue","Symbol","Tone","Mood","Conflict","Narrator"],
+            Medium: ["Metaphor","Simile","Motif","Juxtaposition","Allusion","Imagery","Irony","Perspective","Voice","Structure"],
+            Hard: ["Polyphony","Intertextuality","Metafiction","Postmodernism","Symbolic Discourse","Narrative Subversion","Rhetorical Strategy","Epistemic Positioning","Ideological Lens","Semantic Ambiguity"]
+        },
+        IA2: {
+            Easy: ["Story","Scene","Line","Poem","Idea","Mood","Genre","Voice","Quote","Topic"],
+            Medium: ["Foreshadowing","Framing","Syntax","Diction","Connotation","Alliteration","Archetype","Tension","Focalisation","Allegory"],
+            Hard: ["Critical Lens","Narrative Theory","Structuralism","Post-Structuralism","Deconstruction","Reader-Response Theory","Conceptual Framework","Meta-Analysis","Interdisciplinary Reading","Semiotic Coding"]
+        },
+        IA3: {
+            Easy: ["Write","Draft","Plan","Edit","Proofread","Outline","Describe","Explain","Summarise","Review"],
+            Medium: ["Cohesion","Coherence","Structure","Argumentation","Evidence Integration","Stylistic Feature","Relevance","Voice","Refinement","Editing Strategy"],
+            Hard: ["Extended Argument","Critical Interpretation","Thematic Integration","Comparative Analysis","Synthesis","Meta-Argument","Audience Positioning","Analytical Depth","Discursive Precision","Evaluative Logic"]
+        },
+        IA4: {
+            Easy: ["Identify","Describe","Interpret","Select","Explain","Outline","Summarise","Apply","List","Relate"],
+            Medium: ["Analyse","Evaluate","Justify","Critique","Synthesize","Compare","Contrast","Integrate","Assess","Refine"],
+            Hard: ["Interrogate","Deconstruct","Reframe","Examine Ideology","Advanced Evaluation","Conceptualise","Theorise","Synthesize Concepts","Critically Position","Advanced Integration"]
+        }
+    },
+
+    /* ------------------------------
+       LITERATURE
+    ------------------------------ */
+    "Literature": {
+        IA1: {
+            Easy: ["Voice","Tone","Mood","Symbol","Setting","Narrator","Scene","Poem","Stage","Conflict"],
+            Medium: ["Imagery","Metaphor","Allusion","Juxtaposition","Motif","Syntax","Structure","Perspective","Characterisation","Tension"],
+            Hard: ["Narrative Subversion","Rhetorical Positioning","Literary Ideology","Thematic Integration","Philosophical Lens","Postcolonial Reading","Polyphonic Narrative","Aesthetic Critique","Metaphysical Questioning","Hermeneutic Challenge"]
+        },
+        IA2: {
+            Easy: ["Poet","Story","Scene","Image","Word","Line","Idea","Sound","Genre","Topic"],
+            Medium: ["Symbolism","Foreshadowing","Alliteration","Meter","Rhythm","Persona","Archetype","Figurative Language","Intertext","Dialogue"],
+            Hard: ["Reader-Response Analysis","Comparative Literary Theory","Cultural Critique","Discourse Analysis","Structural Integration","Meta-Narrative","Rhetorical Complexity","Philosophical Intertext","Syntactic Innovation","Ideological Questioning"]
+        },
+        IA3: {
+            Easy: ["Plan","Draft","Edit","Write","Note","Organise","Detail","Explain","Review","Construct"],
+            Medium: ["Synthesis","Evaluation","Interpretation","Argumentation","Voice Refinement","Structural Control","Evidence Integration","Editing Precision","Thematic Logic","Coherence"],
+            Hard: ["Extended Critique","Advanced Interpretation","Conceptual Framework","Philosophical Justification","Deep Structural Analysis","Multi-Text Synthesis","Theoretical Integration","Ideological Positioning","Meta-Interpretation","Literary Innovation"]
+        },
+        IA4: {
+            Easy: ["State","Identify","Describe","Explain","Outline","Summarise","Select","Apply","List","Discuss"],
+            Medium: ["Analyse","Evaluate","Critique","Integrate","Synthesize","Interpret","Model","Compare","Predict","Refine"],
+            Hard: ["Theorise","Deconstruct","Reframe","Interrogate","Examine Ideology","Advanced Evaluation","Philosophical Synthesis","Critical Positioning","Conceptual Integration","Deep Thematic Analysis"]
+        }
+    },
+
+    /* ------------------------------
+       MODERN HISTORY
+    ------------------------------ */
+    "Modern History": {
+        IA1: {
+            Easy: ["Source","Evidence","Event","Date","Leader","War","Reform","Revolt","Empire","Treaty"],
+            Medium: ["Bias","Perspective","Motivation","Causation","Revolution","Movement","Ideology","Nationalism","Propaganda","Diplomacy"],
+            Hard: ["Historiography","Structural Causation","Primary Source Critique","Secondary Source Evaluation","Continuity and Change","Imperial Dynamics","Comparative Revolution","Long-Term Causation","Ideological Conflict","Geopolitical Analysis"]
+        },
+        IA2: {
+            Easy: ["Army","Leader","Plan","Law","Change","Vote","Trade","Policy","Crisis","Strike"],
+            Medium: ["Reform Movement","Industrialisation","Urbanisation","International Relations","Power Balance","Colonial Influence","Resistance","Expansionism","Migration Trend","Economic Reform"],
+            Hard: ["Structuralism","Post-Colonial Analysis","Ideological Framework","Geopolitical Strategy","Macro-Historical Study","Comparative Analysis","Political Theory Integration","Economic-Political Synthesis","Evidence Evaluation","Interpretive Debate"]
+        },
+        IA3: {
+            Easy: ["Record","Note","Research","Read","Find","Collect","Sort","List","Write","Outline"],
+            Medium: ["Source Reliability","Cause and Effect","Trend Analysis","Data Interpretation","Argumentation","Synthesis","Contextualisation","Cross-reference","Persuasive Logic","Historical Reasoning"],
+            Hard: ["Historiographical Synthesis","Research Evaluation","Advanced Argument Construction","Methodology Critique","Long-Term Impact Analysis","Comparative Source Analysis","Political Interpretation","Analytical Depth","Theoretical Integration","Evidence Weighting"]
+        },
+        IA4: {
+            Easy: ["Identify","List","Describe","Define","Outline","Relate","Summarise","Explain","Select","Apply"],
+            Medium: ["Interpret","Analyse","Evaluate","Compare","Model","Contextualise","Infer","Predict","Assess","Critique"],
+            Hard: ["Synthesize","Interrogate","Advanced Evaluation","Ideological Interpretation","Meta-Argument","Historical Theory Application","Evidence Integration","Critical Reflection","Conceptual Reframing","Long-Term Analysis"]
+        }
+    },
+
+    /* ------------------------------
+       ANCIENT HISTORY
+    ------------------------------ */
+    "Ancient History": {
+        IA1: {
+            Easy: ["Artifact","Temple","Empire","King","Trade","War","Myth","Pottery","Tomb","Army"],
+            Medium: ["Primary Source","Excavation","Chronology","Dynasty","Inscription","Culture","Economy","Society","Religion","Architecture"],
+            Hard: ["Epigraphy","Archaeological Methodology","Carbon Dating","Historical Reconstruction","Mythological Interpretation","Socioeconomic Analysis","Cuneiform Study","Cultural Comparison","Imperial Administrative Structure","Material Culture Evaluation"]
+        },
+        IA2: {
+            Easy: ["Stone","Bronze","Iron","Wall","Gate","Ship","Coin","Scroll","Statue","Leader"],
+            Medium: ["Trade Network","Agricultural System","Governance","City-State","Military Reform","Cultural Diffusion","Slavery System","Political Structure","Mythological System","Economic Cycle"],
+            Hard: ["Advanced Epigraphy","Historical Linguistics","Archaeological Survey","Comparative Empire Study","Myth-History Synthesis","Chronological Reconstruction","Civilisation Model","Source Evaluation","Cultural Theory","Interdisciplinary Analysis"]
+        },
+        IA3: {
+            Easy: ["Note","Write","Record","Draw","Plan","Sort","Organise","Name","Identify","Outline"],
+            Medium: ["Source Comparison","Evidence Reliability","Causation","Argumentation","Cross-Referencing","Trend Study","Historical Context","Evaluation","Interpretation","Bias Identification"],
+            Hard: ["Historiographical Analysis","Evidence Synthesis","Advanced Interpretation","Methodology Evaluation","Theoretical Application","Long-Term Impact","Deep Comparative Study","Critical Framework","Meta-Analysis","Cultural Reconstruction"]
+        },
+        IA4: {
+            Easy: ["State","List","Identify","Explain","Describe","Outline","Summarise","Select","Relate","Apply"],
+            Medium: ["Analyse","Evaluate","Interpret","Compare","Model","Discuss","Infer","Predict","Connect","Examine"],
+            Hard: ["Critique","Synthesize","Construct Argument","Evaluate Interpretation","Investigate Assumptions","Historical Theory Application","Advanced Reasoning","Framework Integration","Analytical Depth","Long-Term Interpretation"]
+        }
+    },
+
+    /* ------------------------------
+       EARTH SCIENCE — FULL ADDITION
+    ------------------------------ */
+    "Earth Science": {
+        IA1: {
+            Easy: ["Crust","Mantle","Core","Igneous Rock","Sedimentary Rock","Metamorphic Rock","Mineral","Rock Cycle","Fossil","Crystal"],
+            Medium: ["Weathering","Erosion","Deposition","Compaction","Cementation","Hardness","Lustre","Streak","Grain Size","Stratification"],
+            Hard: ["Sedimentary Facies","Metamorphic Grade","Regional Metamorphism","Contact Metamorphism","Mineral Assemblage","Intrusive Rock","Extrusive Rock","Porphyritic Texture","Geochemical Signature","Lithification"]
+        },
+        IA2: {
+            Easy: ["Plate Boundary","Tectonic Plate","Earthquake","Volcano","Magma","Lava","Fault","Epicentre","Seismic Wave","Rift"],
+            Medium: ["Convergent Boundary","Divergent Boundary","Transform Boundary","Subduction Zone","Ring of Fire","Seismograph","Richter Scale","Moment Magnitude","Hot Spot","Mid-Ocean Ridge"],
+            Hard: ["P-Wave","S-Wave","Liquefaction","Benioff Zone","Isostasy","Plume","Elastic Rebound","Tsunami","Continental Drift","Paleomagnetism"]
+        },
+        IA3: {
+            Easy: ["Atmosphere","Weather","Climate","Cloud","Rainfall","Evaporation","Condensation","Water Cycle","Humidity","Wind"],
+            Medium: ["Greenhouse Effect","Carbon Cycle","Ocean Current","El Niño","La Niña","High Pressure System","Low Pressure System","Front","Tropical Cyclone","Drought"],
+            Hard: ["Radiative Forcing","Climate Feedback","Paleoclimate","Ice Core","Proxy Data","Monsoon","Thermohaline Circulation","Albedo","Anthropogenic Forcing","Ocean Acidification"]
+        },
+        IA4: {
+            Easy: ["Natural Resource","Renewable Resource","Non-renewable Resource","Soil","Groundwater","Aquifer","Erosion Control","Pollution","Recycling","Sustainability"],
+            Medium: ["Land Degradation","Desertification","Salinity","Overfishing","Deforestation","Rehabilitation","Environmental Impact","Mine Site","Catchment","Land-use Planning"],
+            Hard: ["Environmental Footprint","Life-cycle Assessment","Ecosystem Services","Sustainable Yield","Remediation Strategy","Risk Assessment","Environmental Regulation","Carbon Sequestration","Climate Mitigation","Sustainability Indicator"]
+        }
+    }
 
 };
+
+/* ============================================================
+   PAGE INITIALISATION
+============================================================ */
+const subjectListDiv = document.getElementById("subject-list");
+const playerNameFields = document.getElementById("player-name-fields");
+const playerCountInput = document.getElementById("player-count");
+const startBtn = document.getElementById("start-btn");
+
+let selectedSubjects = new Set();
+
+/* Generate subject selection chips */
+SUBJECTS.forEach(sub => {
+    const chip = document.createElement("div");
+    chip.className = "subject-chip";
+    chip.textContent = sub;
+
+    chip.addEventListener("click", () => {
+        chip.classList.toggle("active");
+
+        if (chip.classList.contains("active")) {
+            selectedSubjects.add(sub);
+        } else {
+            selectedSubjects.delete(sub);
+        }
+    });
+
+    subjectListDiv.appendChild(chip);
+});
+
+/* Auto-generate player name fields */
+function updatePlayerFields() {
+    const count = Number(playerCountInput.value);
+    playerNameFields.innerHTML = "";
+    for (let i = 1; i <= count; i++) {
+        const input = document.createElement("input");
+        input.type = "text";
+        input.placeholder = "Player " + i + " Name";
+        input.id = "player" + i;
+        playerNameFields.appendChild(input);
+    }
+}
+
+playerCountInput.addEventListener("input", updatePlayerFields);
+updatePlayerFields();
+
+/* ============================================================
+   GAME LOGIC
+============================================================ */
+let players = [];
+let impostorIndex = null;
+let currentReveal = 0;
+let chosenWord = "";
+let chosenSubject = "";
+
+startBtn.addEventListener("click", () => {
+
+    if (selectedSubjects.size === 0) {
+        alert("Please select at least one subject.");
+        return;
+    }
+
+    players = [];
+    const count = Number(playerCountInput.value);
+
+    for (let i = 1; i <= count; i++) {
+        const name = document.getElementById("player" + i).value.trim();
+        players.push(name || "Player " + i);
+    }
+
+    /* Choose word */
+    const subjectArray = Array.from(selectedSubjects);
+    chosenSubject = subjectArray[Math.floor(Math.random() * subjectArray.length)];
+
+    const IA = document.getElementById("ia-select").value;
+    const diff = document.getElementById("difficulty-select").value;
+
+    const wordPool = WORD_BANK[chosenSubject][IA][diff];
+
+    chosenWord = wordPool[Math.floor(Math.random() * wordPool.length)];
+
+    /* Choose impostor */
+    impostorIndex = Math.floor(Math.random() * players.length);
+    currentReveal = 0;
+
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+
+    document.getElementById("reveal-screen").classList.remove("hidden");
+    showReveal();
+});
+
+/* Show reveal card */
+function showReveal() {
+    const name = players[currentReveal];
+    const playerDiv = document.getElementById("reveal-player");
+    const roleDiv = document.getElementById("reveal-role");
+    const subjectDiv = document.getElementById("reveal-subject");
+    const wordDiv = document.getElementById("reveal-word");
+
+    playerDiv.textContent = name;
+
+    if (currentReveal === impostorIndex) {
+        roleDiv.textContent = "You ARE the Imposter.";
+        subjectDiv.textContent = document.getElementById("hint-toggle").checked
+            ? "Subject Hint: " + chosenSubject
+            : "";
+        wordDiv.textContent = "";
+    } else {
+        roleDiv.textContent = "You are NOT the Imposter.";
+        subjectDiv.textContent = "Subject: " + chosenSubject;
+        wordDiv.textContent = chosenWord;
+    }
+}
+
+/* Next button */
+document.getElementById("next-btn").addEventListener("click", () => {
+    currentReveal++;
+
+    if (currentReveal >= players.length) {
+        alert("Everyone has seen their word. Begin the discussion!");
+        document.getElementById("reveal-screen").classList.add("hidden");
+        return;
+    }
+
+    showReveal();
+});
+</script>
+
+</body>
+</html>
