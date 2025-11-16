@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Imposter EDU – QCAA Edition</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #111827;
+      background: #f3f4f6;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 2rem 1rem;
+      background: radial-gradient(circle at top, #e0f2fe, #f3f4f6);
+    }
+
+    .app {
+      width: 100%;
+      max-width: 960px;
+      background: #ffffff;
+      border-radius: 1.25rem;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+      padding: 1.75rem 1.75rem 2.25rem;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: 1.75rem;
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      margin: 0 0 1.5rem;
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .badge {
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 0.8rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 800px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: #f9fafb;
+      border-radius: 1rem;
+      padding: 1.25rem;
+      box-sizing: border-box;
+      border: 1px solid #e5e7eb;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-bottom: 0.4rem;
+    }
+
+    .subject-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 999px;
+      background: #e5e7eb;
+      cursor: pointer;
+      font-size: 0.85rem;
+      border: 1px solid transparent;
+      user-select: none;
+    }
+
+    .chip input {
+      margin: 0;
+    }
+
+    .chip.selected {
+      background: #1d4ed8;
+      color: #eff6ff;
+      border-color: #1d4ed8;
+    }
+
+    .chip.selected input {
+      accent-color: #eff6ff;
+    }
+
+    .control-group {
+      margin-bottom: 1rem;
+    }
+
+    select,
+    button {
+      font: inherit;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.6rem;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      box-sizing: border-box;
+    }
+
+    .difficulty-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .difficulty-btn {
+      flex: 1 1 0;
+      min-width: 80px;
+      padding: 0.45rem 0.6rem;
+      border-radius: 0.6rem;
+      border: 1px solid #d1d5db;
+      background: #ffffff;
+      font-size: 0.9rem;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.05s ease, box-shadow 0.05s ease, background 0.1s ease;
+    }
+
+    .difficulty-btn.active {
+      background: #111827;
+      color: #f9fafb;
+      border-color: #111827;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.2);
+    }
+
+    .difficulty-btn span {
+      display: block;
+      font-size: 0.75rem;
+      color: #6b7280;
+    }
+
+    .difficulty-btn.active span {
+      color: #e5e7eb;
+    }
+
+    .generate-btn {
+      margin-top: 0.75rem;
+      width: 100%;
+      padding: 0.65rem 0.75rem;
+      border-radius: 0.75rem;
+      border: none;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.35);
+    }
+
+    .generate-btn:active {
+      transform: translateY(1px);
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.35);
+    }
+
+    .error {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: #b91c1c;
+    }
+
+    .result-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .result-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .result-tag {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.55rem;
+      border-radius: 999px;
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .difficulty-pill {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .hint-box {
+      padding: 0.7rem 0.8rem;
+      background: #ecfeff;
+      border-radius: 0.75rem;
+      border: 1px dashed #06b6d4;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .secret-box {
+      padding: 0.9rem 0.95rem;
+      border-radius: 0.85rem;
+      border: 1px solid #e5e7eb;
+      background: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .secret-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9ca3af;
+      margin-bottom: 0.15rem;
+    }
+
+    .secret-word {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .secret-word.hidden {
+      filter: blur(5px);
+      user-select: none;
+    }
+
+    .reveal-btn {
+      padding: 0.4rem 0.75rem;
+      border-radius: 999px;
+      border: none;
+      background: #111827;
+      color: #f9fafb;
+      font-size: 0.8rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .tips {
+      font-size: 0.8rem;
+      color: #6b7280;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <h1>Imposter EDU – QCAA</h1>
+    <p class="subtitle">
+      Select subject(s), IA and difficulty to generate a curriculum-aligned secret word
+      for your Imposter game.
+    </p>
+
+    <div class="badge-row">
+      <span class="badge">AU • QCAA-aligned</span>
+      <span class="badge">Offline classroom friendly</span>
+      <span class="badge">Free to use</span>
+    </div>
+
+    <div class="grid">
+      <!-- LEFT: CONTROLS -->
+      <section class="card">
+        <h2>1. Game Settings</h2>
+
+        <div class="control-group">
+          <div class="section-label">Subjects (choose one or more)</div>
+          <div class="subject-list" id="subjectList">
+            <!-- Chips created by JS -->
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="section-label">Internal Assessment (IA)</div>
+          <select id="iaSelect">
+            <option value="IA1">IA1</option>
+            <option value="IA2">IA2</option>
+            <option value="IA3">IA3</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <div class="section-label">Difficulty</div>
+          <div class="difficulty-row">
+            <button class="difficulty-btn active" data-difficulty="easy">
+              Easy
+              <span>Core terms</span>
+            </button>
+            <button class="difficulty-btn" data-difficulty="medium">
+              Medium
+              <span>Process / analytic</span>
+            </button>
+            <button class="difficulty-btn" data-difficulty="hard">
+              Hard
+              <span>Exam-level</span>
+            </button>
+          </div>
+        </div>
+
+        <button class="generate-btn" id="generateBtn">
+          🎲 Generate Word
+        </button>
+        <div class="error" id="errorArea"></div>
+      </section>
+
+      <!-- RIGHT: RESULT -->
+      <section class="card">
+        <h2>2. Secret Word</h2>
+        <div id="resultArea">
+          <p class="tips">
+            Choose your settings, then hit <strong>Generate Word</strong>.<br />
+            Use this in your Imposter game:
+            <br />– Show the hint to everyone<br />– Reveal the word privately to
+            all players except the imposter.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // ------- DATA -------
+
+    const SUBJECTS = [
+      "Chemistry",
+      "General Mathematics",
+      "Biology",
+      "Economics",
+      "English",
+      "Modern History"
+    ];
+
+    // Each entry: { term, hint, subject, ia, difficulty }
+    const WORD_BANK = [
+      // CHEMISTRY
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Atom", hint: "Basic particle of matter" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Ion", hint: "Charged particle" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "easy", term: "Covalent bond", hint: "Shared electrons" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Electronegativity", hint: "Attraction for shared electrons" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "medium", term: "Intermolecular forces", hint: "Forces between molecules" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Electron configuration", hint: "Arrangement of electrons in shells" },
+      { subject: "Chemistry", ia: "IA1", difficulty: "hard", term: "Hybridisation", hint: "Mixing of atomic orbitals" },
+
+      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Reaction rate", hint: "Speed of a reaction" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "easy", term: "Catalyst", hint: "Lowers activation energy" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Activation energy", hint: "Minimum energy to react" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "medium", term: "Collision theory", hint: "Explains reaction rates" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Equilibrium constant", hint: "Ratio of products to reactants at equilibrium" },
+      { subject: "Chemistry", ia: "IA2", difficulty: "hard", term: "Redox half-equation", hint: "Shows oxidation or reduction separately" },
+
+      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "Acid", hint: "Proton donor" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "easy", term: "pH", hint: "Measure of acidity" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Buffer", hint: "Resists pH change" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "medium", term: "Titration", hint: "Used to find concentration" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Le Chatelier", hint: "Predicts shifts in equilibrium" },
+      { subject: "Chemistry", ia: "IA3", difficulty: "hard", term: "Conjugate acid-base pair", hint: "Differ by one proton" },
+
+      // GENERAL MATHEMATICS
+      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Mean", hint: "Average of data" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "easy", term: "Mode", hint: "Most frequent value" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Standard deviation", hint: "Measure of spread" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "medium", term: "Interquartile range", hint: "Spread of middle 50%" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Regression line", hint: "Line of best fit" },
+      { subject: "General Mathematics", ia: "IA1", difficulty: "hard", term: "Correlation coefficient", hint: "Strength of relationship" },
+
+      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Percentage", hint: "Out of 100" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "easy", term: "Gradient", hint: "Rise over run" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Compound interest", hint: "Interest on interest" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "medium", term: "Inequality", hint: "Uses <, >, ≤ or ≥" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Reducing balance loan", hint: "Loan with decreasing principal" },
+      { subject: "General Mathematics", ia: "IA2", difficulty: "hard", term: "Annuity", hint: "Regular payments over time" },
+
+      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Area", hint: "Space inside a shape" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "easy", term: "Volume", hint: "Space inside a solid" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Prism", hint: "Solid with identical ends" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "medium", term: "Network", hint: "Points joined by edges" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Critical path", hint: "Longest path in a network" },
+      { subject: "General Mathematics", ia: "IA3", difficulty: "hard", term: "Euler trail", hint: "Uses each edge once" },
+
+      // BIOLOGY
+      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Mitochondria", hint: "Cellular power house" },
+      { subject: "Biology", ia: "IA1", difficulty: "easy", term: "Enzyme", hint: "Biological catalyst" },
+      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Osmosis", hint: "Diffusion of water" },
+      { subject: "Biology", ia: "IA1", difficulty: "medium", term: "Mitosis", hint: "Cell division for growth" },
+      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Transcription", hint: "DNA to mRNA" },
+      { subject: "Biology", ia: "IA1", difficulty: "hard", term: "Gene expression", hint: "Using information in DNA" },
+
+      { subject: "Biology", ia: "IA2", difficulty: "easy", term: "Photosynthesis", hint: "Plants making glucose" },
+      { subject: "Biology", ia: "IA2", difficulty: "easy", term: "Respiration", hint: "Releasing energy from food" },
+      { subject: "Biology", ia: "IA2", difficulty: "medium", term: "Trophic level", hint: "Position in food chain" },
+      { subject: "Biology", ia: "IA2", difficulty: "medium", term: "Carrying capacity", hint: "Maximum population size" },
+      { subject: "Biology", ia: "IA2", difficulty: "hard", term: "Keystone species", hint: "Species with strong ecosystem effect" },
+      { subject: "Biology", ia: "IA2", difficulty: "hard", term: "Limiting factor", hint: "Restricts population growth" },
+
+      { subject: "Biology", ia: "IA3", difficulty: "easy", term: "Trait", hint: "Observable characteristic" },
+      { subject: "Biology", ia: "IA3", difficulty: "easy", term: "Mutation", hint: "Change in DNA sequence" },
+      { subject: "Biology", ia: "IA3", difficulty: "medium", term: "Natural selection", hint: "Survival of the fittest" },
+      { subject: "Biology", ia: "IA3", difficulty: "medium", term: "Genetic drift", hint: "Random change in allele frequencies" },
+      { subject: "Biology", ia: "IA3", difficulty: "hard", term: "Bottleneck effect", hint: "Sharp reduction in population" },
+      { subject: "Biology", ia: "IA3", difficulty: "hard", term: "Hardy-Weinberg", hint: "Model for genetic equilibrium" },
+
+      // ECONOMICS
+      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Supply", hint: "Quantity producers are willing to sell" },
+      { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Demand", hint: "Quantity consumers are willing to buy" },
+      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Equilibrium", hint: "Where supply equals demand" },
+      { subject: "Economics", ia: "IA1", difficulty: "medium", term: "Elasticity", hint: "Responsiveness to price change" },
+      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Market failure", hint: "Inefficient allocation of resources" },
+      { subject: "Economics", ia: "IA1", difficulty: "hard", term: "Externality", hint: "Side effect on third parties" },
+
+      { subject: "Economics", ia: "IA2", difficulty: "easy", term: "GDP", hint: "Total value of goods and services" },
+      { subject: "Economics", ia: "IA2", difficulty: "easy", term: "Inflation", hint: "General rise in prices" },
+      { subject: "Economics", ia: "IA2", difficulty: "medium", term: "Fiscal policy", hint: "Government spending and tax" },
+      { subject: "Economics", ia: "IA2", difficulty: "medium", term: "Monetary policy", hint: "Central bank interest rate decisions" },
+      { subject: "Economics", ia: "IA2", difficulty: "hard", term: "Stagflation", hint: "High inflation and unemployment" },
+      { subject: "Economics", ia: "IA2", difficulty: "hard", term: "Productivity growth", hint: "Output per worker rising" },
+
+      { subject: "Economics", ia: "IA3", difficulty: "easy", term: "Trade", hint: "Exchange of goods and services" },
+      { subject: "Economics", ia: "IA3", difficulty: "easy", term: "Tariff", hint: "Tax on imports" },
+      { subject: "Economics", ia: "IA3", difficulty: "medium", term: "Exchange rate", hint: "Price of one currency in another" },
+      { subject: "Economics", ia: "IA3", difficulty: "medium", term: "Globalisation", hint: "Increasing worldwide interconnectedness" },
+      { subject: "Economics", ia: "IA3", difficulty: "hard", term: "Foreign investment", hint: "Overseas funds into domestic economy" },
+      { subject: "Economics", ia: "IA3", difficulty: "hard", term: "Trade liberalisation", hint: "Reducing barriers to trade" },
+
+      // ENGLISH
+      { subject: "English", ia: "IA1", difficulty: "easy", term: "Theme", hint: "Central idea or message" },
+      { subject: "English", ia: "IA1", difficulty: "easy", term: "Setting", hint: "Time and place of a text" },
+      { subject: "English", ia: "IA1", difficulty: "medium", term: "Symbolism", hint: "Objects representing ideas" },
+      { subject: "English", ia: "IA1", difficulty: "medium", term: "Narrative voice", hint: "Who is telling the story" },
+      { subject: "English", ia: "IA1", difficulty: "hard", term: "Intertextuality", hint: "Connections between different texts" },
+      { subject: "English", ia: "IA1", difficulty: "hard", term: "Reader positioning", hint: "How the audience is influenced" },
+
+      { subject: "English", ia: "IA2", difficulty: "easy", term: "Audience", hint: "Intended readers or viewers" },
+      { subject: "English", ia: "IA2", difficulty: "easy", term: "Tone", hint: "Author's attitude" },
+      { subject: "English", ia: "IA2", difficulty: "medium", term: "Juxtaposition", hint: "Contrasting ideas side by side" },
+      { subject: "English", ia: "IA2", difficulty: "medium", term: "Allusion", hint: "Indirect reference to another text" },
+      { subject: "English", ia: "IA2", difficulty: "hard", term: "Motif", hint: "Recurring symbol or idea" },
+      { subject: "English", ia: "IA2", difficulty: "hard", term: "Ideology", hint: "System of beliefs and values" },
+
+      { subject: "English", ia: "IA3", difficulty: "easy", term: "Thesis", hint: "Main argument" },
+      { subject: "English", ia: "IA3", difficulty: "easy", term: "Evidence", hint: "Support for a claim" },
+      { subject: "English", ia: "IA3", difficulty: "medium", term: "Representation", hint: "How people or ideas are portrayed" },
+      { subject: "English", ia: "IA3", difficulty: "medium", term: "Discourse", hint: "Way of talking about a topic" },
+      { subject: "English", ia: "IA3", difficulty: "hard", term: "Metanarrative", hint: "Big overarching story or worldview" },
+      { subject: "English", ia: "IA3", difficulty: "hard", term: "Deconstruction", hint: "Questioning fixed meanings" },
+
+      // MODERN HISTORY
+      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Bias", hint: "Preference that affects judgement" },
+      { subject: "Modern History", ia: "IA1", difficulty: "easy", term: "Perspective", hint: "Point of view" },
+      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Reliability", hint: "Trustworthiness of a source" },
+      { subject: "Modern History", ia: "IA1", difficulty: "medium", term: "Corroboration", hint: "Evidence supporting other evidence" },
+      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Historiography", hint: "Study of how history is written" },
+      { subject: "Modern History", ia: "IA1", difficulty: "hard", term: "Revisionism", hint: "Reinterpretation of historical events" },
+
+      { subject: "Modern History", ia: "IA2", difficulty: "easy", term: "Nationalism", hint: "Strong pride in one's nation" },
+      { subject: "Modern History", ia: "IA2", difficulty: "easy", term: "Revolution", hint: "Rapid, significant political change" },
+      { subject: "Modern History", ia: "IA2", difficulty: "medium", term: "Ideology", hint: "System of political beliefs" },
+      { subject: "Modern History", ia: "IA2", difficulty: "medium", term: "Totalitarianism", hint: "Government with total control" },
+      { subject: "Modern History", ia: "IA2", difficulty: "hard", term: "Realpolitik", hint: "Politics based on practical factors" },
+      { subject: "Modern History", ia: "IA2", difficulty: "hard", term: "Authoritarianism", hint: "Strong central power, limited freedoms" },
+
+      { subject: "Modern History", ia: "IA3", difficulty: "easy", term: "Cause", hint: "Reason something happens" },
+      { subject: "Modern History", ia: "IA3", difficulty: "easy", term: "Consequence", hint: "Result of an action" },
+      { subject: "Modern History", ia: "IA3", difficulty: "medium", term: "Turning point", hint: "Moment when things change direction" },
+      { subject: "Modern History", ia: "IA3", difficulty: "medium", term: "Continuity", hint: "Things that stay the same over time" },
+      { subject: "Modern History", ia: "IA3", difficulty: "hard", term: "Structural forces", hint: "Deep systems shaping events" },
+      { subject: "Modern History", ia: "IA3", difficulty: "hard", term: "Power dynamics", hint: "Who has power and how it's used" }
+    ];
+
+    // ------- UI SETUP -------
+
+    const subjectListEl = document.getElementById("subjectList");
+    const iaSelect = document.getElementById("iaSelect");
+    const difficultyButtons = document.querySelectorAll(".difficulty-btn");
+    const generateBtn = document.getElementById("generateBtn");
+    const errorArea = document.getElementById("errorArea");
+    const resultArea = document.getElementById("resultArea");
+
+    let currentDifficulty = "easy";
+
+    // Build subject chips
+    SUBJECTS.forEach((subject, index) => {
+      const label = document.createElement("label");
+      label.className = "chip";
+
+      const input = document.createElement("input");
+      input.type = "checkbox";
+      input.value = subject;
+      input.id = "subject-" + index;
+
+      input.addEventListener("change", () => {
+        label.classList.toggle("selected", input.checked);
+      });
+
+      label.appendChild(input);
+      label.appendChild(document.createTextNode(subject));
+      subjectListEl.appendChild(label);
+    });
+
+    // Difficulty buttons
+    difficultyButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        currentDifficulty = btn.dataset.difficulty;
+        difficultyButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+
+    function getSelectedSubjects() {
+      return Array.from(
+        subjectListEl.querySelectorAll('input[type="checkbox"]:checked')
+      ).map((input) => input.value);
+    }
+
+    // ------- GENERATION LOGIC -------
+
+    generateBtn.addEventListener("click", () => {
+      errorArea.textContent = "";
+
+      const selectedSubjects = getSelectedSubjects();
+      const ia = iaSelect.value;
+
+      if (!selectedSubjects.length) {
+        errorArea.textContent = "Please select at least one subject.";
+        resultArea.innerHTML =
+          '<p class="tips">Select at least one subject, then generate a word.</p>';
+        return;
+      }
+
+      const candidates = WORD_BANK.filter(
+        (item) =>
+          selectedSubjects.includes(item.subject) &&
+          item.ia === ia &&
+          item.difficulty === currentDifficulty
+      );
+
+      if (!candidates.length) {
+        errorArea.textContent =
+          "No terms found for that combination yet. Try another difficulty or IA.";
+        resultArea.innerHTML =
+          '<p class="tips">You can add more words later by editing the WORD_BANK in the code.</p>';
+        return;
+      }
+
+      const choice =
+        candidates[Math.floor(Math.random() * candidates.length)];
+
+      const resultHtml = `
+        <div class="result-header">
+          <div class="result-tags">
+            <span class="result-tag">${choice.subject}</span>
+            <span class="result-tag">${choice.ia}</span>
+            <span class="result-tag difficulty-pill">${currentDifficulty
+              .charAt(0)
+              .toUpperCase() + currentDifficulty.slice(1)}</span>
+          </div>
+        </div>
+        <div class="hint-box">
+          <strong>Hint:</strong> ${choice.hint}
+        </div>
+        <div class="secret-box">
+          <div>
+            <div class="secret-label">Secret word</div>
+            <div class="secret-word hidden" id="secretWord">${choice.term}</div>
+          </div>
+          <button class="reveal-btn" id="revealBtn">Reveal word</button>
+        </div>
+        <p class="tips">
+          Show the <strong>hint</strong> to everyone.<br/>
+          Reveal the <strong>secret word</strong> one by one to players (except the imposter).
+        </p>
+      `;
+
+      resultArea.innerHTML = resultHtml;
+
+      const revealBtn = document.getElementById("revealBtn");
+      const secretWordEl = document.getElementById("secretWord");
+      let hidden = true;
+
+      revealBtn.addEventListener("click", () => {
+        hidden = !hidden;
+        secretWordEl.classList.toggle("hidden", hidden);
+        revealBtn.textContent = hidden ? "Reveal word" : "Hide word";
+      });
+    });
+  </script>
+</body>
+</html>
