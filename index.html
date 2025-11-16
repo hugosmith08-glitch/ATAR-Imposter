@@ -507,18 +507,20 @@
   <script>
     // ------- SUBJECTS -------
 
-    const SUBJECTS = [
-      "General Mathematics",
-      "Mathematical Methods",
-      "Chemistry",
-      "Biology",
-      "Physics",
-      "English",
-      "Literature",
-      "Economics",
-      "Modern History",
-      "Ancient History"
-    ];
+const SUBJECTS = [
+  "General Mathematics",
+  "Mathematical Methods",
+  "Chemistry",
+  "Biology",
+  "Physics",
+  "English",
+  "Literature",
+  "Economics",
+  "Modern History",
+  "Ancient History",
+  "Earth Science"
+];
+
 
     // ------- WORD BANK -------
     // Each entry: { subject, ia, difficulty, term }
@@ -1077,6 +1079,143 @@
       { subject: "Literature", ia: "IA1", difficulty: "hard", term: "Narrative reliability" },
       { subject: "Literature", ia: "IA1", difficulty: "hard", term: "Symbolic landscape" },
 
+      // ---------- EARTH SCIENCE ----------
+      // IA1 – Earth structure, rocks, minerals
+      { subject: "Earth Science", ia: "IA1", difficulty: "easy", term: "Crust" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "easy", term: "Mantle" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "easy", term: "Core" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "easy", term: "Igneous rock" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "easy", term: "Sedimentary rock" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "easy", term: "Metamorphic rock" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "easy", term: "Mineral" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "easy", term: "Rock cycle" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "easy", term: "Fossil" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "easy", term: "Crystal" },
+
+      { subject: "Earth Science", ia: "IA1", difficulty: "medium", term: "Weathering" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "medium", term: "Erosion" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "medium", term: "Deposition" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "medium", term: "Compaction" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "medium", term: "Cementation" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "medium", term: "Hardness" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "medium", term: "Lustre" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "medium", term: "Streak" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "medium", term: "Grain size" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "medium", term: "Stratification" },
+
+      { subject: "Earth Science", ia: "IA1", difficulty: "hard", term: "Sedimentary facies" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "hard", term: "Metamorphic grade" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "hard", term: "Regional metamorphism" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "hard", term: "Contact metamorphism" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "hard", term: "Mineral assemblage" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "hard", term: "Intrusive rock" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "hard", term: "Extrusive rock" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "hard", term: "Porphyritic texture" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "hard", term: "Geochemical signature" },
+      { subject: "Earth Science", ia: "IA1", difficulty: "hard", term: "Lithification" },
+
+      // IA2 – Plate tectonics, earthquakes, volcanoes
+      { subject: "Earth Science", ia: "IA2", difficulty: "easy", term: "Plate boundary" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "easy", term: "Tectonic plate" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "easy", term: "Earthquake" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "easy", term: "Volcano" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "easy", term: "Magma" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "easy", term: "Lava" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "easy", term: "Fault" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "easy", term: "Epicentre" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "easy", term: "Seismic wave" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "easy", term: "Rift" },
+
+      { subject: "Earth Science", ia: "IA2", difficulty: "medium", term: "Convergent boundary" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "medium", term: "Divergent boundary" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "medium", term: "Transform boundary" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "medium", term: "Subduction zone" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "medium", term: "Ring of Fire" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "medium", term: "Seismograph" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "medium", term: "Richter scale" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "medium", term: "Moment magnitude" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "medium", term: "Hot spot" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "medium", term: "Mid-ocean ridge" },
+
+      { subject: "Earth Science", ia: "IA2", difficulty: "hard", term: "P-wave" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "hard", term: "S-wave" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "hard", term: "Liquefaction" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "hard", term: "Benioff zone" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "hard", term: "Isostasy" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "hard", term: "Plume" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "hard", term: "Elastic rebound" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "hard", term: "Tsunami" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "hard", term: "Continental drift" },
+      { subject: "Earth Science", ia: "IA2", difficulty: "hard", term: "Paleomagnetism" },
+
+      // IA3 – Atmosphere, climate, water
+      { subject: "Earth Science", ia: "IA3", difficulty: "easy", term: "Atmosphere" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "easy", term: "Weather" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "easy", term: "Climate" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "easy", term: "Cloud" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "easy", term: "Rainfall" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "easy", term: "Evaporation" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "easy", term: "Condensation" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "easy", term: "Water cycle" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "easy", term: "Humidity" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "easy", term: "Wind" },
+
+      { subject: "Earth Science", ia: "IA3", difficulty: "medium", term: "Greenhouse effect" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "medium", term: "Carbon cycle" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "medium", term: "Ocean current" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "medium", term: "El Niño" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "medium", term: "La Niña" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "medium", term: "High pressure system" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "medium", term: "Low pressure system" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "medium", term: "Front" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "medium", term: "Tropical cyclone" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "medium", term: "Drought" },
+
+      { subject: "Earth Science", ia: "IA3", difficulty: "hard", term: "Radiative forcing" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "hard", term: "Climate feedback" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "hard", term: "Paleoclimate" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "hard", term: "Ice core" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "hard", term: "Proxy data" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "hard", term: "Monsoon" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "hard", term: "Thermohaline circulation" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "hard", term: "Albedo" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "hard", term: "Anthropogenic forcing" },
+      { subject: "Earth Science", ia: "IA3", difficulty: "hard", term: "Ocean acidification" },
+
+      // IA4 – Resources and human impacts
+      { subject: "Earth Science", ia: "IA4", difficulty: "easy", term: "Natural resource" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "easy", term: "Renewable resource" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "easy", term: "Non-renewable resource" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "easy", term: "Soil" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "easy", term: "Groundwater" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "easy", term: "Aquifer" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "easy", term: "Erosion control" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "easy", term: "Pollution" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "easy", term: "Recycling" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "easy", term: "Sustainability" },
+
+      { subject: "Earth Science", ia: "IA4", difficulty: "medium", term: "Land degradation" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "medium", term: "Desertification" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "medium", term: "Salinity" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "medium", term: "Overfishing" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "medium", term: "Deforestation" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "medium", term: "Rehabilitation" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "medium", term: "Environmental impact" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "medium", term: "Mine site" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "medium", term: "Catchment" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "medium", term: "Land-use planning" },
+
+      { subject: "Earth Science", ia: "IA4", difficulty: "hard", term: "Environmental footprint" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "hard", term: "Life-cycle assessment" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "hard", term: "Ecosystem services" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "hard", term: "Sustainable yield" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "hard", term: "Remediation strategy" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "hard", term: "Risk assessment" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "hard", term: "Environmental regulation" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "hard", term: "Carbon sequestration" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "hard", term: "Climate mitigation" },
+      { subject: "Earth Science", ia: "IA4", difficulty: "hard", term: "Sustainability indicator" }
+      
       // ---------- ECONOMICS ----------
       { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Supply" },
       { subject: "Economics", ia: "IA1", difficulty: "easy", term: "Demand" },
@@ -1472,4 +1611,5 @@
   </script>
 </body>
 </html>
+
 
