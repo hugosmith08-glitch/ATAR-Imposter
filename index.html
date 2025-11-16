@@ -331,9 +331,10 @@
       letter-spacing: 0.04em;
     }
 
-    .secret-word.hidden {
-      filter: blur(5px);
-      user-select: none;
+ .secret-word.hidden {
+  visibility: hidden;  /* text is fully hidden but space stays */
+  user-select: none;
+
     }
 
     .reveal-btn {
@@ -924,3 +925,4 @@
   </script>
 </body>
 </html>
+
